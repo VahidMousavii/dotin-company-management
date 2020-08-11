@@ -1,6 +1,6 @@
 package ir.dotin.service;
 
-import ir.dotin.da.PersonDA;
+import ir.dotin.repository.PersonDA;
 import ir.dotin.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

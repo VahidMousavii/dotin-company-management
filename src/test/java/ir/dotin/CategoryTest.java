@@ -1,5 +1,5 @@
 package ir.dotin;
-import ir.dotin.da.CategoryDA;
+import ir.dotin.repository.CategoryDA;
 import ir.dotin.entity.Category;
 import ir.dotin.entity.SubCategory;
 

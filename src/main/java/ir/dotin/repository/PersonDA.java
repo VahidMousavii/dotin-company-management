@@ -1,4 +1,4 @@
-package ir.dotin.da;
+package ir.dotin.repository;
 
 
 import ir.dotin.entity.Email;

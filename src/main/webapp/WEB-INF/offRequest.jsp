@@ -5,11 +5,19 @@
 <html>
 <head>
     <title>OFF REQUEST PAGE</title>
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="css/custom.css"
+          rel="stylesheet">
 </head>
+<div class="box-table">
 <a href="/person/findAll.do">برگشت به صفحه اصلی</a>
 <br><br>
 <form action="/offRequest/saveOffRequest.do" method="post">
+
     <p>ایجاد درخواست مرخصی جدید</p>
+
+
     <input type="hidden" name="requesterPerson.c_ID" value="${person.c_ID}"/>
     <label for="offDescription">توضیحات</label>
     <input type="text" name="offDescription" id="offDescription"/>
@@ -28,9 +36,9 @@
     <input type="submit" value="ثبت درخواست جدید مرخصی">
 </form>
 
-<table border="1" style="width: 100%">
+<table class="box-table">
 
-    <thead style="background-color: gray;color: aliceblue">
+    <thead>
     <td>نام</td>
     <td>نام خانوادگی</td>
     <td>کد پرسنلی</td>
@@ -48,7 +56,7 @@
     </tr>
 </table>
 
-<table border="1" style=" color: darkblue; width: 100%">
+<table class="box-table" >
     <thead style=" color: darkblue">
     <td>نام</td>
     <td>نوع مرخصی</td>
@@ -70,7 +78,10 @@
             <td>${offrequest.offEndDate}</td>
         </tr>
     </c:forEach>
-
 </table>
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/custom.js"></script>
+</div>
 </body>
 </html>

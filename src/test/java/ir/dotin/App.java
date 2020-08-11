@@ -1,16 +1,7 @@
 package ir.dotin;
 
-import ir.dotin.da.CategoryDA;
-import ir.dotin.da.EmailDA;
-import ir.dotin.da.OffRequestDA;
-import ir.dotin.da.PersonDA;
-import ir.dotin.entity.Email;
-import ir.dotin.entity.OffRequest;
+import ir.dotin.repository.PersonDA;
 import ir.dotin.entity.Person;
-import ir.dotin.entity.SubCategory;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class App {
     public static void main(String[] args) {

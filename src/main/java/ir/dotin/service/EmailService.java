@@ -1,6 +1,6 @@
 package ir.dotin.service;
 
-import ir.dotin.da.EmailDA;
+import ir.dotin.repository.EmailDA;
 import ir.dotin.entity.Email;
 import ir.dotin.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,6 @@
 package ir.dotin.controller;
 
-import ir.dotin.da.OffRequestDA;
-import ir.dotin.da.PersonDA;
-import ir.dotin.entity.Email;
-import ir.dotin.entity.OffRequest;
+import ir.dotin.repository.PersonDA;
 import ir.dotin.entity.Person;
 import ir.dotin.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @Scope("request")
@@ -86,11 +81,4 @@ public class PersonController {
         modelAndView.addObject("persons", personList);
         return modelAndView;
     }
-
-//    @ModelAttribute("receivedPersonEmails")
-//    public List<Email> getEmailList(Long personId){
-//        Person loadedPerson = personDA.loadPersonWithReceivedEmails(personId);
-//        List<Email> emailList =loadedPerson.getReceivedPersonEmails();
-//        return emailList;
-//    }
 }

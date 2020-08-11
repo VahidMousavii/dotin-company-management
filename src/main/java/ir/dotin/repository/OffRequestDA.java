@@ -1,4 +1,4 @@
-package ir.dotin.da;
+package ir.dotin.repository;
 
 import ir.dotin.entity.OffRequest;
 import ir.dotin.entity.Person;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Repository

@@ -1,6 +1,6 @@
 package ir.dotin.service;
 
-import ir.dotin.da.OffRequestDA;
+import ir.dotin.repository.OffRequestDA;
 import ir.dotin.entity.OffRequest;
 import ir.dotin.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
