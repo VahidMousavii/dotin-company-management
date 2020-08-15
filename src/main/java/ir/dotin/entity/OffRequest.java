@@ -5,12 +5,13 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@javax.persistence.Entity(name = "t_offRequest")
+@Entity
+@Table(name = "t_offrequest")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OffRequest extends Entity {
+public class OffRequest extends ParentEntity {
 
     @Column(name = "c_off_description")
     private String offDescription;

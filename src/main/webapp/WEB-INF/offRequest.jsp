@@ -57,7 +57,7 @@
 
     <table class="table table-striped table-dark" style="width: 95%; margin-left: auto;
   margin-right: auto">
-        <thead style=" color: darkblue">
+        <thead>
         <td>نام</td>
         <td>نوع مرخصی</td>
         <td>مدیر مرتبط</td>
@@ -67,17 +67,17 @@
         <td>تاریخ پایان مرخصی</td>
         </thead>
 
-<%--        <c:forEach items="${person.offRequestList}" var="offrequest">--%>
-<%--            <tr>--%>
-<%--                <td>${offrequest.requesterPerson.personName}</td>--%>
-<%--                <td>${offrequest.typeOfRequest.subCategoryFarsiName}</td>--%>
-<%--                <td>${offrequest.receiverManagerPerson.personName}</td>--%>
-<%--                <td>${offrequest.offDescription}</td>--%>
-<%--                <td>${offrequest.creationDate}</td>--%>
-<%--                <td>${offrequest.offStartDate}</td>--%>
-<%--                <td>${offrequest.offEndDate}</td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
+        <c:forEach items="${offRequests}" var="offrequest">
+            <tr>
+                <td>${offrequest.requesterPerson.personName}</td>
+                <td>${offrequest.typeOfRequest.subCategoryFarsiName}</td>
+                <td><%--todo refactoring--%>123</td>
+                <td>${offrequest.offDescription}</td>
+                <td>${offrequest.creationDate}</td>
+                <td>${offrequest.offStartDate}</td>
+                <td>${offrequest.offEndDate}</td>
+            </tr>
+        </c:forEach>
     </table>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

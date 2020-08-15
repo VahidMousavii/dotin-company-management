@@ -6,19 +6,20 @@ import javax.persistence.*;
 import java.sql.Blob;
 import java.util.List;
 
-@javax.persistence.Entity(name = "t_email")
+@Entity
+@Table(name = "t_email")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Email extends Entity {
+public class Email extends ParentEntity {
 
     @ManyToOne
-    @JoinColumn(name = "c_sender_Person_ID")
+    @JoinColumn(name = "c_sender_person_ID")
     private Person senderPerson;
 
     @OneToMany
-    @JoinTable(name = "MM_EMAIL_RECEIVER_PERSON"
+    @JoinTable(name = "t_emailreceiverperson"
         , joinColumns = {@JoinColumn(name = "C_EMAIL_ID")}
         , inverseJoinColumns = {@JoinColumn(name = "C_PERSON_ID")})
     private List<Person> receiverPersons;

@@ -15,13 +15,13 @@ public class OffRequestService {
     @Autowired
     private OffRequestDA offRequestDA;
 
-    public List<OffRequest> getOffRequestListByPersonId(Long personId){
-        Person loadedPerson = personService.loadPerson(personId);
-        //todo refactor
-//        List<OffRequest> offRequestList = loadedPerson.getOffRequestList();
-        return null;
+    public List<OffRequest> getOffRequestListByPersonId(Long personId) {
+        List<OffRequest> offRequestList = offRequestDA.findOffRequestByPersonId(personId);
+        return offRequestList;
+
     }
-    public void saveOffRequest(OffRequest offRequest){
+
+    public void saveOffRequest(OffRequest offRequest) {
         offRequestDA.saveOffRequest(offRequest);
 
     }

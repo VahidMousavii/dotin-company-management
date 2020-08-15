@@ -7,13 +7,14 @@ import lombok.Setter;
 //ali hibernate ro gozashtam roo none . mikhai bezar create drop chon roo create drop exception midad
 import javax.persistence.*;
 
-@Getter
-@Setter
+
 @Table(name = "t_entity")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @MappedSuperclass
-public class Entity {
+public class ParentEntity {
     @Id
     @GeneratedValue()
     @JoinColumn(name = "ID", nullable = false)

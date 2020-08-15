@@ -8,12 +8,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-@javax.persistence.Entity(name = "t_category")
+@Entity
+@Table(name = "t_category")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category extends Entity {
+public class Category extends ParentEntity {
     @Column(name = "c_category_name")
     private String categoryName;
 

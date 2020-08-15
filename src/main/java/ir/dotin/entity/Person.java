@@ -5,13 +5,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
-@javax.persistence.Entity(name = "t_person")
+@Entity
+@Table(name = "t_person")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Person extends Entity {
+public class Person extends ParentEntity {
 
     @Column(name = "c_personFamily")
     private String personFamily;

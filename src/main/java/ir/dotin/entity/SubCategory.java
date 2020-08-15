@@ -7,12 +7,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@javax.persistence.Entity(name = "t_subCategory")
+@Entity
+@Table(name = "t_subcategory")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubCategory extends Entity {
+public class SubCategory extends ParentEntity {
 
     @Column(name = "c_subCategoryName")
     private String subCategoryName;

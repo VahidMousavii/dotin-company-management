@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @Scope("request")
 @RequestMapping("/offRequest")
 
 public class OffRequestController {
 
-    @Autowired
-    private OffRequestDA offRequestDA;
+
     @Autowired
     private CategoryService categoryService;
     @Autowired
@@ -33,15 +34,17 @@ public class OffRequestController {
     @RequestMapping("/offRequest.do")
     public ModelAndView showOffRequest(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/offRequest.jsp");
-        Person loadPerson = personService.loadPerson(person.getID());
+        List<OffRequest> offRequestList = offRequestService.getOffRequestListByPersonId(person.getID());
         Category category = categoryService.loadCategoryById(1L);
-        modelAndView.addObject("person", loadPerson);
+        Person loadedPerson = personService.loadPerson(person.getID());
+        modelAndView.addObject("offRequests", offRequestList);
         modelAndView.addObject("offCategory", category);
+        modelAndView.addObject("person", loadedPerson);
         return modelAndView;
 
     }
 
-    @RequestMapping(value = "/saveOffRequest.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/saveOffRequest.do", method = RequestMethod.POST)
     public ModelAndView saveOffRequest(@ModelAttribute OffRequest offRequest) {
         ModelAndView modelAndView = new ModelAndView("/offRequest/offRequest.do?ID=" + offRequest.getRequesterPerson().getID());
         offRequestService.saveOffRequest(offRequest);

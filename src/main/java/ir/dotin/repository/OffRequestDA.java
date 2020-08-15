@@ -27,8 +27,6 @@ public class OffRequestDA {
             offRequest.setRequesterPerson(person);
             SubCategory subCategory = session.load(SubCategory.class, offRequest.getTypeOfRequest().getID());
             offRequest.setTypeOfRequest(subCategory);
-            //todo refactor
-//            offRequest.setReceiverManagerPerson(person.getDirectManager());
             Transaction tx = session.beginTransaction();
             session.save(offRequest);
             tx.commit();
@@ -44,9 +42,24 @@ public class OffRequestDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("from t_offRequest ");
+            Query query = session.createQuery("from OffRequest");
             List<OffRequest> list = query.list();
             tx.commit();
+            return list;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public List<OffRequest> findOffRequestByPersonId(Long personId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from OffRequest");
+            //query.setParameter("personID", personId);
+            List<OffRequest> list = query.list();
             return list;
         } finally {
             if (session != null) {

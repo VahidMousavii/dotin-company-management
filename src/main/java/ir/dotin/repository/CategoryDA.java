@@ -54,7 +54,7 @@ public class CategoryDA {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("from t_category c where c.ID= :categoryId");
+            Query query = session.createQuery("from Category c where c.ID= :categoryId");
             query.setParameter("categoryId", id);
             Category category = (Category) query.uniqueResult();
             Hibernate.initialize(category.getSubCategories());

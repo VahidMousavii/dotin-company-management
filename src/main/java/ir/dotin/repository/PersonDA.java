@@ -36,7 +36,7 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("from t_person tp where tp.active = :active");
+            Query query = session.createQuery("from Person tp where tp.active = :active");
             query.setParameter("active", person.getActive());
             List<Person> list = query.list();
             tx.commit();
@@ -75,7 +75,7 @@ public class PersonDA {
             session = sessionFactory.openSession();
 
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("delete from t_person tp where tp.ID = :ID");
+            Query query = session.createQuery("delete from Person tp where tp.ID = :ID");
             query.setParameter("ID", id);
             query.executeUpdate();
             tx.commit();
@@ -91,7 +91,7 @@ public class PersonDA {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("from t_person tp where tp.personName like :personName ");
+            Query query = session.createQuery("from Person tp where tp.personName like :personName ");
             query.setParameter("personName", name);
             return query.list();
         } finally {
@@ -107,8 +107,6 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             loadedPerson = session.get(Person.class, id);
-            //todo refactor
-//            Hibernate.initialize(loadedPerson.getOffRequestList());
         } finally {
             if (session != null) {
                 session.close();
