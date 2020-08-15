@@ -16,8 +16,6 @@ import java.util.List;
 public class CategoryDA {
     @Autowired
     private SessionFactory sessionFactory;
-    @PersistenceContext
-    private EntityManager entityManager;
 
     public void addCategory(Category category) {
 
@@ -77,6 +75,21 @@ public class CategoryDA {
             Hibernate.initialize(category.getSubCategories());
             List<SubCategory> subCategories = category.getSubCategories();
             return subCategories;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public SubCategory findSubCategoryByName(String subCategoryName) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from SubCategory sc where sc.subCategoryName like :subCategoryName");
+            query.setParameter("subCategoryName", subCategoryName);
+            SubCategory subCategory = (SubCategory) query.uniqueResult();
+            return subCategory;
         } finally {
             if (session != null) {
                 session.close();

@@ -22,4 +22,9 @@ public class CategoryService {
         List<SubCategory> subCategoryList = categoryDA.findSubCategoriesByName(categoryName);
         return subCategoryList;
     }
+
+    public SubCategory loadSubCategoryBySubCategoryName(String subCategoryName) {
+        SubCategory subCategoryByName = categoryDA.findSubCategoryByName(subCategoryName);
+        return subCategoryByName;
+    }
 }

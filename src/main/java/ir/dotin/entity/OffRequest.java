@@ -26,8 +26,8 @@ public class OffRequest extends ParentEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     private SubCategory typeOfRequest;
 
-
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    private SubCategory statusOfRequest;
 
 }
 

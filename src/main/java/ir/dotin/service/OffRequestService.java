@@ -1,5 +1,6 @@
 package ir.dotin.service;
 
+import ir.dotin.entity.SubCategory;
 import ir.dotin.repository.OffRequestDA;
 import ir.dotin.entity.OffRequest;
 import ir.dotin.entity.Person;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public class OffRequestService {
     @Autowired
-    private PersonService personService;
+    private CategoryService categoryService;
     @Autowired
     private OffRequestDA offRequestDA;
 
@@ -22,6 +23,8 @@ public class OffRequestService {
     }
 
     public void saveOffRequest(OffRequest offRequest) {
+        SubCategory pendingSub = categoryService.loadSubCategoryBySubCategoryName("pending");
+        offRequest.setStatusOfRequest(pendingSub);
         offRequestDA.saveOffRequest(offRequest);
 
     }

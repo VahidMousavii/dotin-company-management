@@ -57,8 +57,8 @@ public class OffRequestDA {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("from OffRequest");
-            //query.setParameter("personID", personId);
+            Query query = session.createQuery("from OffRequest offR where offR.requesterPerson.ID= :personID");
+            query.setParameter("personID", personId);
             List<OffRequest> list = query.list();
             return list;
         } finally {
