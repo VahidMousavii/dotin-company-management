@@ -6,24 +6,29 @@ import javax.persistence.*;
 import java.sql.Blob;
 import java.util.List;
 
-@Entity(name = "t_email")
+@javax.persistence.Entity(name = "t_email")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Email extends Common {
+public class Email extends Entity {
+
     @ManyToOne
+    @JoinColumn(name = "c_sender_Person_ID")
     private Person senderPerson;
 
-    @ManyToMany(mappedBy = "receivedPersonEmails")
+    @OneToMany
+    @JoinTable(name = "MM_EMAIL_RECEIVER_PERSON"
+        , joinColumns = {@JoinColumn(name = "C_EMAIL_ID")}
+        , inverseJoinColumns = {@JoinColumn(name = "C_PERSON_ID")})
     private List<Person> receiverPersons;
 
     @Lob
-    @Column(name = "c_emailAttachment")
+    @Column(name = "c_email_attachment")
     private Blob emailAttachment;
-    @Column(name = "c_emailContent")
+    @Column(name = "c_email_content")
     private String emailContent;
-    @Column(name = "c_emailSubject")
+    @Column(name = "c_email_subject")
     private String emailSubject;
 
 }

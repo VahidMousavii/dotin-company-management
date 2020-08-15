@@ -27,7 +27,7 @@ public class EmailController {
     public ModelAndView sendEmail(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/email.jsp");
         modelAndView.addObject("senderPerson", person);
-        person.setC_active(true);
+        person.setActive(true);
         List<Person> allActivePersons = personService.loadAllPerson(person);
         modelAndView.addObject("receiverPersons", allActivePersons);
         return modelAndView;
@@ -36,7 +36,7 @@ public class EmailController {
 
     @RequestMapping("/saveEmail.do")
     public ModelAndView saveEmail(@ModelAttribute Email email) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?c_active=1");
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
         emailService.saveEmail(email);
         return modelAndView;
     }
@@ -44,7 +44,7 @@ public class EmailController {
     @RequestMapping("/showSentBox.do")
     public ModelAndView showSentBox(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
-        Person loadedPerson = personService.loadPersonWithSentEmails(person.getC_ID());
+        Person loadedPerson = personService.loadPersonWithSentEmails(person.getID());
         modelAndView.addObject("person", loadedPerson);
         modelAndView.addObject("isSent", true);
         return modelAndView;
@@ -53,7 +53,7 @@ public class EmailController {
     @RequestMapping("/showInbox.do")
     public ModelAndView showInbox(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
-        Person loadedPerson = personService.loadPersonWithReceivedEmails(person.getC_ID());
+        Person loadedPerson = personService.loadPersonWithReceivedEmails(person.getID());
         modelAndView.addObject("person", loadedPerson);
         modelAndView.addObject("isSent", false);
         return modelAndView;

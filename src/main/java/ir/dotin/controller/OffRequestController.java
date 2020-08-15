@@ -33,7 +33,7 @@ public class OffRequestController {
     @RequestMapping("/offRequest.do")
     public ModelAndView showOffRequest(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/offRequest.jsp");
-        Person loadPerson = personService.loadPerson(person.getC_ID());
+        Person loadPerson = personService.loadPerson(person.getID());
         Category category = categoryService.loadCategoryById(1L);
         modelAndView.addObject("person", loadPerson);
         modelAndView.addObject("offCategory", category);
@@ -43,7 +43,7 @@ public class OffRequestController {
 
     @RequestMapping(value = "/saveOffRequest.do",method = RequestMethod.POST)
     public ModelAndView saveOffRequest(@ModelAttribute OffRequest offRequest) {
-        ModelAndView modelAndView = new ModelAndView("/offRequest/offRequest.do?c_ID=" + offRequest.getRequesterPerson().getC_ID());
+        ModelAndView modelAndView = new ModelAndView("/offRequest/offRequest.do?ID=" + offRequest.getRequesterPerson().getID());
         offRequestService.saveOffRequest(offRequest);
 
         return modelAndView;

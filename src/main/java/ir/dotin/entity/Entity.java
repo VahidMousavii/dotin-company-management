@@ -9,16 +9,15 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Table(name = "t_common")
+@Table(name = "t_entity")
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public class Common {
+public class Entity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @SequenceGenerator(name = "person_generator", allocationSize = 1, sequenceName = "person_seq")
-    @JoinColumn(name = "c_id", nullable = false)
-    private Long c_ID;
+    @GeneratedValue()
+    @JoinColumn(name = "ID", nullable = false)
+    private Long ID;
 
     @Column(name = "c_version")
     @Version
@@ -27,5 +26,6 @@ public class Common {
     @Column(name = "c_creationDate")
     private String creationDate;
 
-    private Boolean c_active;
+    @Column(name = "c_active")
+    private Boolean active;
 }

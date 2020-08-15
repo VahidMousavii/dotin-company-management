@@ -5,6 +5,7 @@
   Time: 11:03 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,10 +15,10 @@
     <link href="css/custom.css"
           rel="stylesheet">
 </head>
-<div class="table-responsive">
+<div class="box-table">
 
     <form action="/person/save.do" method="post">
-        <table class="table-responsive">
+        <table class="box-table">
         <tr>
             <td>نام</td>
             <td>
@@ -42,9 +43,19 @@
             <td>کد ملی</td>
             <td>  <input type="text" name="nationalCode"/></td>
         </tr>
+            <br>
+<%--            <tr>--%>
+<%--                <p> مدیر مستقیم</p>--%>
+<%--                <select name="directManager.ID">--%>
+<%--                    <c:forEach items="${directManager}" var="directManager">--%>
+<%--                        <option value="${directManager.personName}">${directManager}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
+<%--            </tr>--%>
+            <br>
         <tr>
             <td>وضعیت کاربر(فعال/غیرفعال)</td>
-            <td><input type="checkbox" name="c_active"/></td>
+            <td><input type="checkbox" name="active"/></td>
         </tr>
 
         <input type="submit" value="ثبت کاربر جدید"/>

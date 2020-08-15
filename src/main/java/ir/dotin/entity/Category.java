@@ -8,16 +8,17 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "t_category")
+@javax.persistence.Entity(name = "t_category")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category extends Common {
-    @Column(name = "c_categoryName")
+public class Category extends Entity {
+    @Column(name = "c_category_name")
     private String categoryName;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mainCategory", fetch = FetchType.LAZY)
+    @JoinColumn(name = "c_main_category_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SubCategory> subCategories;
 
 

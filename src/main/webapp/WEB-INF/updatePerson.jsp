@@ -10,7 +10,7 @@
 <body>
 <form action="/person/saveUpdate.do">
     <tr>
-        <td><input type="hidden" name="c_ID" value="${loadedPerson.c_ID}"/></td>
+        <td><input type="hidden" name="ID" value="${loadedPerson.ID}"/></td>
         <br>
         <td>نام</td>
         <input type="text" name="personName" value="${loadedPerson.personName}"/>
@@ -23,7 +23,7 @@
         <br>
         <td>
             <p>وضعیت کاربر فعال/غیرفعال</p>
-            <input type="checkbox" name="active" id="active" <c:if test="${loadedPerson.c_active==true}">checked</c:if>>
+            <input type="checkbox" name="active" id="active" <c:if test="${loadedPerson.active==true}">checked</c:if>>
         </td>
         <br>
         <input type="submit" value="بروز رسانی کاربر"/>

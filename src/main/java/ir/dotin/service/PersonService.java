@@ -18,8 +18,8 @@ public class PersonService {
     }
 
     public List<Person> loadAllPerson(Person person) {
-        if (person.getC_active() == null) {
-            person.setC_active(false);
+        if (person.getActive() == null) {
+            person.setActive(false);
         }
         List<Person> personList = personDA.findAll(person);
         return personList;
@@ -34,8 +34,8 @@ public class PersonService {
     }
 
     public void save(Person person) {
-        if (person.getC_active() == null) {
-            person.setC_active(false);
+        if (person.getActive() == null) {
+            person.setActive(false);
         }
         personDA.save(person);
     }

@@ -24,17 +24,18 @@ public class EmailDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Person loadedSenderPerson = (Person) session.load(Person.class, email.getSenderPerson().getC_ID());
+            Person loadedSenderPerson = (Person) session.load(Person.class, email.getSenderPerson().getID());
             List<Person> personReceiverList = new ArrayList<>();
             for (Person receiverPerson : email.getReceiverPersons()) {
-                Person loadedReceiverPerson = session.load(Person.class, receiverPerson.getC_ID());
-                if (loadedReceiverPerson.getSentEmails() == null) {
-                    List<Email> emailList = new ArrayList<>();
-                    emailList.add(email);
-                    loadedReceiverPerson.setReceivedPersonEmails(emailList);
-                } else {
-                    loadedReceiverPerson.getReceivedPersonEmails().add(email);
-                }
+                Person loadedReceiverPerson = session.load(Person.class, receiverPerson.getID());
+                //todo refactor
+//                if (loadedReceiverPerson.getSentEmails() == null) {
+//                    List<Email> emailList = new ArrayList<>();
+//                    emailList.add(email);
+////                    loadedReceiverPerson.setReceivedPersonEmails(emailList);
+//                } else {
+////                    loadedReceiverPerson.getReceivedPersonEmails().add(email);
+//                }
                 personReceiverList.add(loadedReceiverPerson);
 
             }

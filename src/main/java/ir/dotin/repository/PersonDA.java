@@ -36,8 +36,8 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("from t_person tp where tp.c_active = :active");
-            query.setParameter("active", person.getC_active());
+            Query query = session.createQuery("from t_person tp where tp.active = :active");
+            query.setParameter("active", person.getActive());
             List<Person> list = query.list();
             tx.commit();
             return list;
@@ -50,14 +50,14 @@ public class PersonDA {
 
 
     public void update(Person person) {
-        if (person.getC_active() == null) {
-            person.setC_active(false);
+        if (person.getActive() == null) {
+            person.setActive(false);
         }
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            Person loadedPerson = session.load(Person.class, person.getC_ID());
+            Person loadedPerson = session.load(Person.class, person.getID());
             loadedPerson.setPersonName(person.getPersonName());
             loadedPerson.setPersonPhone(person.getPersonPhone());
             session.saveOrUpdate(loadedPerson);
@@ -75,8 +75,8 @@ public class PersonDA {
             session = sessionFactory.openSession();
 
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("delete from t_person tp where tp.c_ID = :c_ID");
-            query.setParameter("c_ID", id);
+            Query query = session.createQuery("delete from t_person tp where tp.ID = :ID");
+            query.setParameter("ID", id);
             query.executeUpdate();
             tx.commit();
         } finally {
@@ -107,7 +107,8 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             loadedPerson = session.get(Person.class, id);
-            Hibernate.initialize(loadedPerson.getOffRequestList());
+            //todo refactor
+//            Hibernate.initialize(loadedPerson.getOffRequestList());
         } finally {
             if (session != null) {
                 session.close();
@@ -122,10 +123,11 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             loadedPerson = session.get(Person.class, id);
-            Hibernate.initialize(loadedPerson.getSentEmails());
-            for (Email sentEmail : loadedPerson.getSentEmails()) {
-                Hibernate.initialize(sentEmail.getReceiverPersons());
-            }
+            //todo refactor
+//            Hibernate.initialize(loadedPerson.getSentEmails());
+//            for (Email sentEmail : loadedPerson.getSentEmails()) {
+//                Hibernate.initialize(sentEmail.getReceiverPersons());
+//            }
         } finally {
             if (session != null) {
                 session.close();
@@ -140,7 +142,7 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             loadedPerson = session.get(Person.class, id);
-            Hibernate.initialize(loadedPerson.getReceivedPersonEmails());
+//            Hibernate.initialize(loadedPerson.getReceivedPersonEmails());
         } finally {
             if (session != null) {
                 session.close();
@@ -151,7 +153,7 @@ public class PersonDA {
 
 
     public Person loadPerson(Person person) {
-        return this.loadPerson(person.getC_ID());
+        return this.loadPerson(person.getID());
     }
 
 
@@ -174,8 +176,8 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Person loadedPerson = (Person) session.get(Person.class, person.getC_ID());
-            loadedPerson.setC_active(true);
+            Person loadedPerson = (Person) session.get(Person.class, person.getID());
+            loadedPerson.setActive(true);
             session.saveOrUpdate(loadedPerson);
             tx.commit();
         } finally {
@@ -190,8 +192,8 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Person loadedPerson = (Person) session.get(Person.class, person.getC_ID());
-            loadedPerson.setC_active(false);
+            Person loadedPerson = (Person) session.get(Person.class, person.getID());
+            loadedPerson.setActive(false);
             session.saveOrUpdate(loadedPerson);
             tx.commit();
         } finally {

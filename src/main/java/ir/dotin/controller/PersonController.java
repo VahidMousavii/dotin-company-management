@@ -23,13 +23,15 @@ public class PersonController {
     @Autowired
     PersonService personService;
 
-    @RequestMapping(value = "/savePage.do" )
-    public ModelAndView savePage() {
+    @RequestMapping(value = "/savePage.do")
+    public ModelAndView savePage(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/addPerson.jsp");
+        List<Person> loadedPersonlist = personService.loadAllPerson(person);
+        modelAndView.addObject("directManager",loadedPersonlist);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/save.do" , method = RequestMethod.POST)
+    @RequestMapping(value = "/save.do", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView();
         personService.save(person);
@@ -40,7 +42,7 @@ public class PersonController {
     @RequestMapping("/update.do")
     public ModelAndView update(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/updatePerson.jsp");
-        Person loadedPerson = personService.loadPerson(person.getC_ID());
+        Person loadedPerson = personService.loadPerson(person.getID());
         modelAndView.addObject("loadedPerson", loadedPerson);
         return modelAndView;
     }
@@ -55,7 +57,7 @@ public class PersonController {
 
     /*@RequestMapping("/delete.do")
     public String delete(@ModelAttribute Person person) throws Exception {
-        personDA.deleteByID(person.getC_ID());
+        personDA.deleteByID(person.getID());
         return "redirect:/person/findAll.do";
     }*/
 

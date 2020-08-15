@@ -12,7 +12,7 @@ public class MainController {
 
     @RequestMapping("/")
     public ModelAndView firstPage() {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?c_active=1");
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
         return modelAndView;
     }
 

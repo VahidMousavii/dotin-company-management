@@ -19,7 +19,7 @@ public class EmailService {
 
         while (itr.hasNext()) {
             Person person = itr.next();
-            if (person.getC_ID() == null) {
+            if (person.getID() == null) {
                 itr.remove();
             }
         }

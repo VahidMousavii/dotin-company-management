@@ -40,7 +40,7 @@ public class CategoryDA {
             Query query = session.createQuery("from t_subCategory sc where sc.subCategoryName like :name");
             query.setParameter("name", name);
             SubCategory subCategory = (SubCategory) query.uniqueResult();
-            Hibernate.initialize(subCategory.getOffRequestList());
+//            Hibernate.initialize(subCategory.getOffRequestList());
             return subCategory;
         } finally {
             if (session != null) {
@@ -54,7 +54,7 @@ public class CategoryDA {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("from t_category c where c.c_ID= :categoryId");
+            Query query = session.createQuery("from t_category c where c.ID= :categoryId");
             query.setParameter("categoryId", id);
             Category category = (Category) query.uniqueResult();
             Hibernate.initialize(category.getSubCategories());
@@ -64,6 +64,5 @@ public class CategoryDA {
                 session.close();
             }
         }
-
     }
 }

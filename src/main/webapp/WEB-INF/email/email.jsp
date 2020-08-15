@@ -15,9 +15,9 @@
 
         i++;
         var htmlCode = '<div id=persons' + i + '>' +
-            '<select name="receiverPersons[' + i + '].c_ID">\n' +
+            '<select name="receiverPersons[' + i + '].ID">\n' +
             '            <c:forEach items="${receiverPersons}" var="receiverPerson">\n' +
-            '            <option value="${receiverPerson.c_ID}">${receiverPerson.personName}</option>\n' +
+            '            <option value="${receiverPerson.ID}">${receiverPerson.personName}</option>\n' +
             '            </c:forEach>\n' +
             '            </select><img src="/assets/image/email/remove.png" onclick="remove(' + i + ')">' +
             '           <br/> </div>';
@@ -60,7 +60,7 @@
         <tr>
             <td>
 
-                <input type="hidden" name="senderPerson.c_ID" value="${senderPerson.c_ID}">
+                <input type="hidden" name="senderPerson.ID" value="${senderPerson.ID}">
             </td>
         </tr>
         <tr>
@@ -68,9 +68,9 @@
                 <p>گیرنده</p>
                 <input type="button" onclick="addReceiverPerson()" value="add receiver"/>
                 <br/>
-                <select name="receiverPersons[0].c_ID">
+                <select name="receiverPersons[0].ID">
                     <c:forEach items="${receiverPersons}" var="receiverPerson">
-                        <option value="${receiverPerson.c_ID}">${receiverPerson.personName}</option>
+                        <option value="${receiverPerson.ID}">${receiverPerson.personName}</option>
                     </c:forEach>
                 </select>
                 <div id="receivers">
@@ -84,11 +84,11 @@
             </td>
             <td>
                 <p>صندوق دریافت</p>
-                <a href="/email/showInbox.do?c_ID=${person.c_ID}&c_active=true">Inbox</a>
+                <a href="/email/showInbox.do?ID=${person.ID}&active=true">Inbox</a>
             </td>
             <td>
                 <p>صندوق ارسال</p>
-                <a href="/email/showSentBox.do?c_ID=${person.c_ID}&c_active=true">SentBox</a>
+                <a href="/email/showSentBox.do?ID=${person.ID}&active=true">SentBox</a>
     </table>
 </form>
 

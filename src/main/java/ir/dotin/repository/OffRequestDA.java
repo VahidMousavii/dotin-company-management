@@ -23,11 +23,12 @@ public class OffRequestDA {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Person person = session.load(Person.class, offRequest.getRequesterPerson().getC_ID());
+            Person person = session.load(Person.class, offRequest.getRequesterPerson().getID());
             offRequest.setRequesterPerson(person);
-            SubCategory subCategory = session.load(SubCategory.class, offRequest.getTypeOfRequest().getC_ID());
+            SubCategory subCategory = session.load(SubCategory.class, offRequest.getTypeOfRequest().getID());
             offRequest.setTypeOfRequest(subCategory);
-            offRequest.setReceiverManagerPerson(person.getDirectManager());
+            //todo refactor
+//            offRequest.setReceiverManagerPerson(person.getDirectManager());
             Transaction tx = session.beginTransaction();
             session.save(offRequest);
             tx.commit();

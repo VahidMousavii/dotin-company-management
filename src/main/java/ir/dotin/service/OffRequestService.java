@@ -17,8 +17,9 @@ public class OffRequestService {
 
     public List<OffRequest> getOffRequestListByPersonId(Long personId){
         Person loadedPerson = personService.loadPerson(personId);
-        List<OffRequest> offRequestList = loadedPerson.getOffRequestList();
-        return offRequestList;
+        //todo refactor
+//        List<OffRequest> offRequestList = loadedPerson.getOffRequestList();
+        return null;
     }
     public void saveOffRequest(OffRequest offRequest){
         offRequestDA.saveOffRequest(offRequest);
