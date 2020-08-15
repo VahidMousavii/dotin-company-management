@@ -25,6 +25,11 @@ public class PersonService {
         return personList;
     }
 
+    public List<Person> loadManagers() {
+        List<Person> managers = personDA.findAllActiveManagers();
+        return managers;
+    }
+
     public void deactivate(Person person) {
         personDA.deactivate(person);
     }

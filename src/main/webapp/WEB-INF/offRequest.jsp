@@ -27,7 +27,7 @@
         <input type="text" name="offEndDate" id="offEndDate"/>
         <br>
         <select name="typeOfRequest.ID">
-            <C:forEach items="${offCategory.subCategories}" var="offSub">
+            <C:forEach items="${offRequestType}" var="offSub">
                 <option value="${offSub.ID}">${offSub.subCategoryFarsiName}</option>
             </C:forEach>
         </select>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 @Scope("prototype")
@@ -59,6 +60,23 @@ public class CategoryDA {
             Category category = (Category) query.uniqueResult();
             Hibernate.initialize(category.getSubCategories());
             return category;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public List<SubCategory> findSubCategoriesByName(String categoryName) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from Category c where c.categoryName like :categoryName");
+            query.setParameter("categoryName", categoryName);
+            Category category = (Category) query.uniqueResult();
+            Hibernate.initialize(category.getSubCategories());
+            List<SubCategory> subCategories = category.getSubCategories();
+            return subCategories;
         } finally {
             if (session != null) {
                 session.close();

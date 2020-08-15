@@ -44,19 +44,29 @@
             <td>  <input type="text" name="nationalCode"/></td>
         </tr>
             <br>
-<%--            <tr>--%>
-<%--                <p> مدیر مستقیم</p>--%>
-<%--                <select name="directManager.ID">--%>
-<%--                    <c:forEach items="${directManager}" var="directManager">--%>
-<%--                        <option value="${directManager.personName}">${directManager}</option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
-<%--            </tr>--%>
+            <tr>
+                <p> سمت</p>
+                <select name="roleSubCategory.ID">
+                    <c:forEach items="${roles}" var="role">
+                        <option value="${role.ID}">${role.subCategoryFarsiName}</option>
+                    </c:forEach>
+                </select>
+
+            </tr>
             <br>
         <tr>
             <td>وضعیت کاربر(فعال/غیرفعال)</td>
             <td><input type="checkbox" name="active"/></td>
         </tr>
+            <tr>
+                <td>
+                    <select name="directManager.ID">
+                        <c:forEach items="${managers}" var="manager">
+                            <option value="${manager.ID}">${manager.personName}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
 
         <input type="submit" value="ثبت کاربر جدید"/>
         </table>

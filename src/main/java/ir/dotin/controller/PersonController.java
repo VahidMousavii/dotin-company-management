@@ -1,7 +1,9 @@
 package ir.dotin.controller;
 
+import ir.dotin.entity.SubCategory;
 import ir.dotin.repository.PersonDA;
 import ir.dotin.entity.Person;
+import ir.dotin.service.CategoryService;
 import ir.dotin.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,12 +24,16 @@ public class PersonController {
     PersonDA personDA;
     @Autowired
     PersonService personService;
+    @Autowired
+    CategoryService categoryService;
 
     @RequestMapping(value = "/savePage.do")
-    public ModelAndView savePage(@ModelAttribute Person person) {
+    public ModelAndView savePage() {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/addPerson.jsp");
-        List<Person> loadedPersonlist = personService.loadAllPerson(person);
-        modelAndView.addObject("directManager",loadedPersonlist);
+        List<Person> managers = personService.loadManagers();
+        List<SubCategory> subCategories = categoryService.loadSubCategoriesByName("role");
+        modelAndView.addObject("managers", managers);
+        modelAndView.addObject("roles", subCategories);
         return modelAndView;
     }
 

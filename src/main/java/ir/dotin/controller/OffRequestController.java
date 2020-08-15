@@ -1,5 +1,6 @@
 package ir.dotin.controller;
 
+import ir.dotin.entity.SubCategory;
 import ir.dotin.repository.OffRequestDA;
 import ir.dotin.entity.Category;
 import ir.dotin.entity.OffRequest;
@@ -35,10 +36,10 @@ public class OffRequestController {
     public ModelAndView showOffRequest(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/offRequest.jsp");
         List<OffRequest> offRequestList = offRequestService.getOffRequestListByPersonId(person.getID());
-        Category category = categoryService.loadCategoryById(1L);
+        List<SubCategory> offRequestType = categoryService.loadSubCategoriesByName("typeOfRequest");
         Person loadedPerson = personService.loadPerson(person.getID());
         modelAndView.addObject("offRequests", offRequestList);
-        modelAndView.addObject("offCategory", category);
+        modelAndView.addObject("offRequestType", offRequestType);
         modelAndView.addObject("person", loadedPerson);
         return modelAndView;
 

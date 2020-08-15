@@ -20,7 +20,10 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-
+            Person loadedDirectManagerPerson = session.load(Person.class, person.getDirectManager().getID());
+            SubCategory loadSubCat = session.load(SubCategory.class, person.getRoleSubCategory().getID());
+            person.setDirectManager(loadedDirectManagerPerson);
+            person.setRoleSubCategory(loadSubCat);
             session.save(person);
             tx.commit();
 
@@ -48,6 +51,20 @@ public class PersonDA {
         }
     }
 
+    public List<Person> findAllActiveManagers() {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from Person tp where tp.roleSubCategory.subCategoryName like :managerRole and tp.active = true");
+            query.setParameter("managerRole", "manager");
+            List<Person> list = query.list();
+            return list;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 
     public void update(Person person) {
         if (person.getActive() == null) {
