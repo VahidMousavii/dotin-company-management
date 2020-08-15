@@ -25,4 +25,15 @@ public class OffRequestDATest extends TestCase {
             System.out.println(offRequest.getOffDescription());
         }
     }
+
+    @Test
+    public void testFindPendingOffRequestsOfManager() {
+        List<OffRequest> pendingOffRequestsOfManager = offRequestDA.findPendingOffRequestsOfManager(2L);
+        for (OffRequest offRequest : pendingOffRequestsOfManager) {
+            System.out.println(offRequest.getRequesterPerson().getPersonName());
+            System.out.println(offRequest.getID());
+            System.out.println(offRequest.getOffDescription());
+        }
+
+    }
 }

@@ -68,5 +68,20 @@ public class OffRequestDA {
         }
     }
 
+    public List<OffRequest> findPendingOffRequestsOfManager(Long managerPersonId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from OffRequest offR where offR.requesterPerson.directManager.ID= :managerPersonId and offR.statusOfRequest.subCategoryName like 'pending'");
+            query.setParameter("managerPersonId", managerPersonId);
+            List<OffRequest> list = query.list();
+            return list;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
 
 }
