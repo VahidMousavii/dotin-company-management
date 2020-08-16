@@ -60,7 +60,7 @@
                     <td><a href="/person/deactivate.do?ID=${person.ID}&active=true">غیر فعال کردن</a></td>
                 </c:if>
                 <td>
-                    <a href="/offRequest/offRequest.do?ID=${person.ID}&personName=${person.personName}">مرخصی</a>
+                    <a href="/offRequest/offRequest.do?ID=${person.ID}">مرخصی</a>
                 </td>
                 <td>
                     <a href="/email/email.do?ID=${person.ID}&active=1">ایمیل</a>

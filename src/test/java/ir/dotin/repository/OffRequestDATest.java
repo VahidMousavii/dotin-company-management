@@ -36,4 +36,11 @@ public class OffRequestDATest extends TestCase {
         }
 
     }
+
+    @Test
+    public void testConfirm() {
+        OffRequest offRequest = new OffRequest();
+        offRequest.setID(1L);
+        offRequestDA.confirm(offRequest);
+    }
 }

@@ -41,7 +41,7 @@ public class PersonController {
     public ModelAndView save(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView();
         personService.save(person);
-        modelAndView.setViewName("/person/findAll.do");
+        modelAndView.setViewName("/person/findAll.do?active=1");
         return modelAndView;
     }
 
@@ -55,7 +55,7 @@ public class PersonController {
 
     @RequestMapping("/saveUpdate.do")
     public ModelAndView saveUpdate(@ModelAttribute Person person) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do");
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
         personService.update(person);
         modelAndView.addObject(person);
         return modelAndView;
@@ -69,7 +69,7 @@ public class PersonController {
 
     @RequestMapping("/active.do")
     public ModelAndView active(Person person) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do");
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
         personService.active(person);
         return modelAndView;
 
@@ -77,7 +77,7 @@ public class PersonController {
 
     @RequestMapping("/deactivate.do")
     public ModelAndView deactivate(@ModelAttribute Person person) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do");
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
         personService.deactivate(person);
         return modelAndView;
     }

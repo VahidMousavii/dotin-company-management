@@ -77,6 +77,8 @@ public class PersonDA {
             Person loadedPerson = session.load(Person.class, person.getID());
             loadedPerson.setPersonName(person.getPersonName());
             loadedPerson.setPersonPhone(person.getPersonPhone());
+            loadedPerson.setPersonFamily(person.getPersonFamily());
+            loadedPerson.setActive(person.getActive());
             session.saveOrUpdate(loadedPerson);
             session.getTransaction().commit();
         } finally {

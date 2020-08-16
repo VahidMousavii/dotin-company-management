@@ -3,6 +3,7 @@ package ir.dotin.repository;
 import ir.dotin.entity.OffRequest;
 import ir.dotin.entity.Person;
 import ir.dotin.entity.SubCategory;
+import ir.dotin.service.CategoryService;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,6 +19,8 @@ import java.util.List;
 public class OffRequestDA {
     @Autowired
     private SessionFactory sessionFactory;
+    @Autowired
+    private CategoryService categoryService;
 
     public void saveOffRequest(OffRequest offRequest) {
         Session session = null;
@@ -76,6 +79,39 @@ public class OffRequestDA {
             query.setParameter("managerPersonId", managerPersonId);
             List<OffRequest> list = query.list();
             return list;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public void confirm(OffRequest offRequest) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();
+            OffRequest loadedOffRequest = session.get(OffRequest.class, offRequest.getID());
+            SubCategory confirmedLoadedSubCat = session.load(SubCategory.class, categoryService.loadSubCategoryBySubCategoryName("confirmed").getID());
+            loadedOffRequest.setStatusOfRequest(confirmedLoadedSubCat);
+            session.saveOrUpdate(loadedOffRequest);
+            tx.commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+    public void reject(OffRequest offRequest) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();
+            OffRequest loadedOffRequest = session.get(OffRequest.class, offRequest.getID());
+            SubCategory rejectLoadedSubCategory = session.load(SubCategory.class, categoryService.loadSubCategoryBySubCategoryName("rejected").getID());
+            loadedOffRequest.setStatusOfRequest(rejectLoadedSubCategory);
+            session.saveOrUpdate(loadedOffRequest);
+            tx.commit();
         } finally {
             if (session != null) {
                 session.close();
