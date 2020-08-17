@@ -36,6 +36,10 @@ public class EmailService {
         List<Email> receivedEmailsByPersonId = emailDA.loadReceivedEmailsByPersonId(personId);
         return receivedEmailsByPersonId;
     }
+    public List<Email> loadSentEmailsByPersonId(Long personId) {
+        List<Email> sentEmailsByPersonId = emailDA.loadSentEmailsByPersonId(personId);
+        return sentEmailsByPersonId;
+    }
 
 
 }

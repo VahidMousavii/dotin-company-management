@@ -44,8 +44,8 @@ public class EmailController {
     @RequestMapping("/showSentBox.do")
     public ModelAndView showSentBox(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
-        Person loadedPerson = personService.loadPersonWithSentEmails(person.getID());
-        modelAndView.addObject("person", loadedPerson);
+        List<Email> sentEmails = emailService.loadSentEmailsByPersonId(person.getID());
+        modelAndView.addObject("sentEmails", sentEmails);
         modelAndView.addObject("isSent", true);
         return modelAndView;
     }

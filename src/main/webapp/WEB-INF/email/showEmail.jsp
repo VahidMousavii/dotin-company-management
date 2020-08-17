@@ -12,39 +12,50 @@
 
 <body>
 
-    <table>
-        <c:forEach items="${receivedEmails}" var="recEmail">
-            <tr>
-                <td>
-                    <label for ="emailsubject">عنوان ایمیل</label>
-                    <input type="text" id="emailsubject" disabled value="${recEmail.emailSubject}">
-                </td>
-                <td>
-                    <label for ="senderPerson">ارسال کننده</label>
-                    <input type="text" id="senderPerson" disabled value="${recEmail.senderPerson.personName}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                <textarea id="receivedEmailContent"  name="emailContent" rows="5" cols="50">
+<table>
+    <c:if test="${receivedEmails.size()==0}">
+        <p>ایمیلی برای نمایش وجود ندارد</p>
+    </c:if>
+    <c:if test="${receivedEmails.size()==null}">
+        <p></p>
+    </c:if>
+    <c:forEach items="${receivedEmails}" var="recEmail">
+
+
+        <tr>
+            <td>
+                <label for="emailsubject">عنوان ایمیل</label>
+                <input type="text" id="emailsubject" disabled value="${recEmail.emailSubject}">
+            </td>
+            <td>
+                <label for="senderPerson">ارسال کننده</label>
+                <input type="text" id="senderPerson" disabled value="${recEmail.senderPerson.personName}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea id="receivedEmailContent" name="emailContent" rows="5" cols="50">
                         ${recEmail.emailContent}
                 </textarea>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 
 <c:if test="${isSent==true}">
     <table>
-        <c:forEach items="${person.sentEmails}" var="sentEmail">
+        <c:if test="${sentEmails.size()==0}">
+            <p>ایمیلی برای نمایش وجود ندارد</p>
+        </c:if>
+        <c:forEach items="${sentEmails}" var="sentEmail">
             <tr>
                 <td>
-                    <label for ="sentEmailSubject">عنوان</label>
+                    <label for="sentEmailSubject">عنوان</label>
                     <input type="text" id="sentEmailSubject" disabled value="${sentEmail.emailSubject}">
                 </td>
                 <td>
                     <c:forEach items="${sentEmail.receiverPersons}" var="recPer">
-                        <label for ="receiverPerson">دریافت کننده:</label>
+                        <label for="receiverPerson">دریافت کننده:</label>
                         <input type="text" id="receiverPerson" disabled value="${recPer.personName}">
 
                     </c:forEach>

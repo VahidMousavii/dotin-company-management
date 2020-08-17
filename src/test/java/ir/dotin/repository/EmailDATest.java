@@ -25,4 +25,11 @@ public class EmailDATest extends TestCase {
         }
 
     }
+    @Test
+    public void testLoadSentEmailsByPersonId() {
+        List<Email> sentEmail = emailDA.loadSentEmailsByPersonId(2L);
+        for (Email email : sentEmail) {
+            System.out.println(email.getEmailContent());
+        }
+    }
 }

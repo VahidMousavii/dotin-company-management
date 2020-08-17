@@ -1,10 +1,8 @@
 package ir.dotin.repository;
 
 import ir.dotin.entity.Email;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import ir.dotin.entity.Person;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -62,5 +60,23 @@ public class EmailDA {
             }
         }
     }
+    public List<Email> loadSentEmailsByPersonId(Long personId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("from Email e where e.senderPerson.ID = :personID");
+            query.setParameter("personID", personId);
+            List<Email> emails = query.list();
+            for (Email email : emails) {
+                Hibernate.initialize(email.getReceiverPersons());
+            }
+            return emails;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
 
 }
