@@ -11,9 +11,9 @@
 </head>
 
 <body>
-<c:if test="${isSent==false}">
+
     <table>
-        <c:forEach items="${person.receivedPersonEmails}" var="recEmail">
+        <c:forEach items="${receivedEmails}" var="recEmail">
             <tr>
                 <td>
                     <label for ="emailsubject">عنوان ایمیل</label>
@@ -21,7 +21,7 @@
                 </td>
                 <td>
                     <label for ="senderPerson">ارسال کننده</label>
-                    <input type="text" id="senderPerson" disabled value="${person.personName}">
+                    <input type="text" id="senderPerson" disabled value="${recEmail.senderPerson.personName}">
                 </td>
             </tr>
             <tr>
@@ -33,7 +33,7 @@
             </tr>
         </c:forEach>
     </table>
-</c:if>
+
 <c:if test="${isSent==true}">
     <table>
         <c:forEach items="${person.sentEmails}" var="sentEmail">

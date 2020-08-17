@@ -32,5 +32,10 @@ public class EmailService {
         return allEmails;
     }
 
+    public List<Email> loadReceivedEmailsByPersonID(Long personId) {
+        List<Email> receivedEmailsByPersonId = emailDA.loadReceivedEmailsByPersonId(personId);
+        return receivedEmailsByPersonId;
+    }
+
 
 }

@@ -153,21 +153,6 @@ public class PersonDA {
         return loadedPerson;
     }
 
-    public Person loadPersonWithReceivedEmails(Long id) {
-        Session session = null;
-        Person loadedPerson;
-        try {
-            session = sessionFactory.openSession();
-            loadedPerson = session.get(Person.class, id);
-//            Hibernate.initialize(loadedPerson.getReceivedPersonEmails());
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return loadedPerson;
-    }
-
 
     public Person loadPerson(Person person) {
         return this.loadPerson(person.getID());

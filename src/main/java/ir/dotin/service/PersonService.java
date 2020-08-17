@@ -55,10 +55,7 @@ public class PersonService {
         return person;
     }
 
-    public Person loadPersonWithReceivedEmails(Long id) {
-        Person loadedPerson = personDA.loadPersonWithReceivedEmails(id);
-        return loadedPerson;
-    }
+
 
     public Person loadPersonWithSentEmails(Long id) {
         Person loadedPerson = personDA.loadPersonWithSentEmails(id);

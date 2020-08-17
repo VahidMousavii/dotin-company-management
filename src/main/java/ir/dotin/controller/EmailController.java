@@ -53,8 +53,8 @@ public class EmailController {
     @RequestMapping("/showInbox.do")
     public ModelAndView showInbox(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
-        Person loadedPerson = personService.loadPersonWithReceivedEmails(person.getID());
-        modelAndView.addObject("person", loadedPerson);
+        List<Email> receivedEmails = emailService.loadReceivedEmailsByPersonID(person.getID());
+        modelAndView.addObject("receivedEmails", receivedEmails);
         modelAndView.addObject("isSent", false);
         return modelAndView;
 

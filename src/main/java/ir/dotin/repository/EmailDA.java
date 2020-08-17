@@ -1,7 +1,6 @@
 package ir.dotin.repository;
 
 import ir.dotin.entity.Email;
-import ir.dotin.entity.Person;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -42,6 +40,22 @@ public class EmailDA {
             List<Email> list = query.list();
             tx.commit();
             return list;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public List<Email> loadReceivedEmailsByPersonId(Long personId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Query query = session.createQuery("select e from Email e join e.receiverPersons rp where rp.ID = :personID");
+            query.setParameter("personID", personId);
+
+
+            return query.list();
         } finally {
             if (session != null) {
                 session.close();
