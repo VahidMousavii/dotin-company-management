@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,6 +21,14 @@ public class EmailDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
+            List<Person> receiverPersonList = new ArrayList<>();
+            for (Person receiverPerson : email.getReceiverPersons()) {
+                Person loadedReceiverPerson = session.get(Person.class, receiverPerson.getID());
+                receiverPersonList.add(loadedReceiverPerson);
+            }
+            email.setReceiverPersons(receiverPersonList);
+            Person lodedSenderPerson = session.get(Person.class, email.getSenderPerson().getID());
+            email.setSenderPerson(lodedSenderPerson);
             session.save(email);
             tx.commit();
         } finally {
@@ -60,6 +69,7 @@ public class EmailDA {
             }
         }
     }
+
     public List<Email> loadSentEmailsByPersonId(Long personId) {
         Session session = null;
         try {

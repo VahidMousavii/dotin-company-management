@@ -4,6 +4,7 @@ import ir.dotin.entity.Email;
 import ir.dotin.entity.Person;
 import ir.dotin.service.EmailService;
 import ir.dotin.service.PersonService;
+import ir.dotin.to.EmailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -35,10 +38,10 @@ public class EmailController {
 
     }
 
-    @RequestMapping(value = "/saveEmail.do", method = RequestMethod.POST)
-    public ModelAndView saveEmail(@ModelAttribute Email email) {
+    @RequestMapping(value = "/saveEmail.do",method = RequestMethod.POST)
+    public ModelAndView saveEmail(@ModelAttribute EmailDTO emailDTO) throws IOException, SQLException {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
-        emailService.saveEmail(email);
+        emailService.saveEmail(emailDTO);
         return modelAndView;
     }
 
