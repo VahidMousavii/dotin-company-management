@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -34,7 +33,7 @@
     <title>SEND EMAIL PAGE</title>
 </head>
 <body>
-<form action="/email/saveEmail.do" onclick="getSelected()">
+<form action="/email/saveEmail.do" method="post" enctype="multipart/form-data">
     <table border="1">
         <tr>
             <td>
@@ -76,6 +75,14 @@
                 <div id="receivers">
 
                 </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="file">فایل</label>
+            </td>
+            <td>
+                <input id="file" type="file" name="emailAttachment"/>
             </td>
         </tr>
         <tr>

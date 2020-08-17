@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class EmailController {
 
     }
 
-    @RequestMapping("/saveEmail.do")
+    @RequestMapping(value = "/saveEmail.do", method = RequestMethod.POST)
     public ModelAndView saveEmail(@ModelAttribute Email email) {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
         emailService.saveEmail(email);

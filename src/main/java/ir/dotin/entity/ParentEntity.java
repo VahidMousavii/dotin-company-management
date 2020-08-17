@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//ali hibernate ro gozashtam roo none . mikhai bezar create drop chon roo create drop exception midad
 import javax.persistence.*;
 
 
