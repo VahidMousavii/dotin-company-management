@@ -29,9 +29,9 @@ public class ParentEntity {
     private Boolean active;
 
     public ParentEntity(ParentEntityDTO parentEntityDTO) {
-        this.ID=parentEntityDTO.getID();
-        this.active=parentEntityDTO.getActive();
-        this.version=parentEntityDTO.getVersion();
-        this.creationDate=parentEntityDTO.getCreationDate();
+        this.ID = parentEntityDTO.getID();
+        this.active = parentEntityDTO.getActive();
+        this.version = parentEntityDTO.getVersion();
+        this.creationDate = parentEntityDTO.getCreationDate();
     }
 }

@@ -4,6 +4,8 @@ import ir.dotin.entity.SubCategory;
 import ir.dotin.repository.OffRequestDA;
 import ir.dotin.entity.OffRequest;
 import ir.dotin.entity.Person;
+import ir.dotin.to.OffRequestDTO;
+import ir.dotin.to.SubCategoryDTO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +20,23 @@ public class OffRequestService {
     @Autowired
     private OffRequestDA offRequestDA;
 
-    public List<OffRequest> getOffRequestListByPersonId(Long personId) {
-        List<OffRequest> offRequestList = offRequestDA.findOffRequestByPersonId(personId);
+    public List<OffRequestDTO> getOffRequestListByPersonId(Long personId) {
+        List<OffRequestDTO> offRequestList = offRequestDA.findOffRequestByPersonId(personId);
         return offRequestList;
 
     }
 
-    public void saveOffRequest(OffRequest offRequest) {
-        SubCategory pendingSub = categoryService.loadSubCategoryBySubCategoryName("pending");
-        offRequest.setStatusOfRequest(pendingSub);
-        offRequestDA.saveOffRequest(offRequest);
+    public void saveOffRequest(OffRequestDTO offRequestDTO) {
+        SubCategoryDTO subCategoryDTO = categoryService.loadSubCategoryBySubCategoryName("pending");
+        offRequestDTO.setStatusOfRequest(subCategoryDTO);
+        offRequestDA.saveOffRequest(offRequestDTO);
     }
 
-    public void confirmStatus(OffRequest offRequest) {
-        offRequestDA.confirm(offRequest);
+    public void confirmStatus(OffRequestDTO offRequestDTO) {
+        offRequestDA.confirm(offRequestDTO);
     }
 
-    public void rejectStatus(OffRequest offRequest) {
-        offRequestDA.reject(offRequest);
+    public void rejectStatus(OffRequestDTO offRequestDTO) {
+        offRequestDA.reject(offRequestDTO);
     }
 }

@@ -2,13 +2,13 @@ package ir.dotin.repository;
 
 import ir.dotin.entity.Category;
 import ir.dotin.entity.SubCategory;
+import ir.dotin.to.SubCategoryDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -65,7 +65,7 @@ public class CategoryDA {
         }
     }
 
-    public List<SubCategory> findSubCategoriesByName(String categoryName) {
+    public List<SubCategoryDTO> findSubCategoriesByName(String categoryName) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
@@ -74,7 +74,14 @@ public class CategoryDA {
             Category category = (Category) query.uniqueResult();
             Hibernate.initialize(category.getSubCategories());
             List<SubCategory> subCategories = category.getSubCategories();
-            return subCategories;
+
+            List<SubCategoryDTO> subCategoryDTOS = new ArrayList<>();
+            for (SubCategory subCategory : subCategories) {
+                SubCategoryDTO subCategoryDTO = new SubCategoryDTO(subCategory);
+                subCategoryDTOS.add(subCategoryDTO);
+            }
+
+            return subCategoryDTOS;
         } finally {
             if (session != null) {
                 session.close();
@@ -82,14 +89,16 @@ public class CategoryDA {
         }
     }
 
-    public SubCategory findSubCategoryByName(String subCategoryName) {
+    public SubCategoryDTO findSubCategoryByName(String subCategoryName) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from SubCategory sc where sc.subCategoryName like :subCategoryName");
             query.setParameter("subCategoryName", subCategoryName);
             SubCategory subCategory = (SubCategory) query.uniqueResult();
-            return subCategory;
+
+            SubCategoryDTO subCategoryDTO = new SubCategoryDTO(subCategory);
+            return subCategoryDTO;
         } finally {
             if (session != null) {
                 session.close();

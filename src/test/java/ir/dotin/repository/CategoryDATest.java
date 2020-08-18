@@ -1,6 +1,7 @@
 package ir.dotin.repository;
 
 import ir.dotin.entity.SubCategory;
+import ir.dotin.to.SubCategoryDTO;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ public class CategoryDATest extends TestCase {
 
     @Test
     public void testFindSubCategoryByName() {
-        SubCategory rejected = categoryDA.findSubCategoryByName("rejected");
+        SubCategoryDTO rejected = categoryDA.findSubCategoryByName("rejected");
         System.out.println(rejected.getMainCategory().getCategoryName());
         System.out.println(rejected.getSubCategoryName());
 

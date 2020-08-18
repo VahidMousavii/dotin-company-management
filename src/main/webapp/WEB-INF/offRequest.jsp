@@ -16,7 +16,7 @@
 
 
         <input type="hidden" name="requesterPerson.ID" value="${person.ID}"/>
-        <label for="offDescription">توضیحات</label>
+        <label class="danger" for="offDescription">توضیحات</label>
         <input type="text" name="offDescription" id="offDescription"/>
         <br>
         <label for="offStartDate"> تاریخ آغاز مرخصی</label>

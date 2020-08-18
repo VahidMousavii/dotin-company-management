@@ -5,6 +5,7 @@ import ir.dotin.entity.Person;
 import ir.dotin.service.EmailService;
 import ir.dotin.service.PersonService;
 import ir.dotin.to.EmailDTO;
+import ir.dotin.to.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -28,11 +29,11 @@ public class EmailController {
 
 
     @RequestMapping("/email.do")
-    public ModelAndView sendEmail(@ModelAttribute Person person) {
+    public ModelAndView sendEmail(@ModelAttribute PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/email.jsp");
-        modelAndView.addObject("senderPerson", person);
-        person.setActive(true);
-        List<Person> allActivePersons = personService.loadAllPerson(person);
+        modelAndView.addObject("senderPerson", personDTO);
+        personDTO.setActive(true);
+        List<PersonDTO> allActivePersons = personService.loadAllPerson(personDTO);
         modelAndView.addObject("receiverPersons", allActivePersons);
         return modelAndView;
 
@@ -48,7 +49,7 @@ public class EmailController {
     @RequestMapping("/showSentBox.do")
     public ModelAndView showSentBox(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
-        List<Email> sentEmails = emailService.loadSentEmailsByPersonId(person.getID());
+        List<EmailDTO> sentEmails = emailService.loadSentEmailsByPersonId(person.getID());
         modelAndView.addObject("sentEmails", sentEmails);
         modelAndView.addObject("isSent", true);
         return modelAndView;
@@ -57,10 +58,9 @@ public class EmailController {
     @RequestMapping("/showInbox.do")
     public ModelAndView showInbox(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
-        List<Email> receivedEmails = emailService.loadReceivedEmailsByPersonID(person.getID());
+        List<EmailDTO> receivedEmails = emailService.loadReceivedEmailsByPersonID(person.getID());
         modelAndView.addObject("receivedEmails", receivedEmails);
         modelAndView.addObject("isSent", false);
         return modelAndView;
-
     }
 }

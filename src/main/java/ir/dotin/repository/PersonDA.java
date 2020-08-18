@@ -1,13 +1,17 @@
 package ir.dotin.repository;
 
 
-import ir.dotin.entity.Email;
 import ir.dotin.entity.Person;
 import ir.dotin.entity.SubCategory;
-import org.hibernate.*;
+import ir.dotin.to.PersonDTO;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -34,16 +38,20 @@ public class PersonDA {
         }
     }
 
-    public List<Person> findAll(Person person) {
+    public List<PersonDTO> findAll(PersonDTO personTO) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Transaction tx = session.beginTransaction();
             Query query = session.createQuery("from Person tp where tp.active = :active");
-            query.setParameter("active", person.getActive());
+            query.setParameter("active", personTO.getActive());
             List<Person> list = query.list();
-            tx.commit();
-            return list;
+
+            List<PersonDTO> personDTOS = new ArrayList<>();
+            for (Person person1 : list) {
+                PersonDTO personDTO = new PersonDTO(person1);
+                personDTOS.add(personDTO);
+            }
+            return personDTOS;
         } finally {
             if (session != null) {
                 session.close();
@@ -120,18 +128,19 @@ public class PersonDA {
         }
     }
 
-    public Person loadPerson(Long id) {
+    public PersonDTO loadPerson(Long id) {
         Session session = null;
         Person loadedPerson;
         try {
             session = sessionFactory.openSession();
             loadedPerson = session.get(Person.class, id);
+            return new PersonDTO(loadedPerson);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return loadedPerson;
+
     }
 
     public Person loadPersonWithSentEmails(Long id) {
@@ -154,7 +163,7 @@ public class PersonDA {
     }
 
 
-    public Person loadPerson(Person person) {
+    public PersonDTO loadPerson(Person person) {
         return this.loadPerson(person.getID());
     }
 

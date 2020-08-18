@@ -8,6 +8,9 @@ import ir.dotin.entity.Person;
 import ir.dotin.service.CategoryService;
 import ir.dotin.service.OffRequestService;
 import ir.dotin.service.PersonService;
+import ir.dotin.to.OffRequestDTO;
+import ir.dotin.to.PersonDTO;
+import ir.dotin.to.SubCategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -33,12 +36,12 @@ public class OffRequestController {
     private OffRequestService offRequestService;
 
     @RequestMapping("/offRequest.do")
-    public ModelAndView showOffRequest(@ModelAttribute Person person) {
+    public ModelAndView showOffRequest(@ModelAttribute PersonDTO person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/offRequest.jsp");
-        List<OffRequest> offRequestList = offRequestService.getOffRequestListByPersonId(person.getID());
-        List<SubCategory> offRequestType = categoryService.loadSubCategoriesByName("typeOfRequest");
-        Person loadedPerson = personService.loadPerson(person.getID());
-        List<OffRequest> pendingOffRequestsOfManager = personService.findPendingOffRequestsOfManager(loadedPerson);
+        List<OffRequestDTO> offRequestList = offRequestService.getOffRequestListByPersonId(person.getID());
+        List<SubCategoryDTO> offRequestType = categoryService.loadSubCategoriesByName("typeOfRequest");
+        PersonDTO loadedPerson = personService.loadPerson(person.getID());
+        List<OffRequestDTO> pendingOffRequestsOfManager = personService.findPendingOffRequestsOfManager(loadedPerson);
         modelAndView.addObject("offRequests", offRequestList);
         modelAndView.addObject("offRequestType", offRequestType);
         modelAndView.addObject("person", loadedPerson);
@@ -48,22 +51,22 @@ public class OffRequestController {
     }
 
     @RequestMapping(value = "/saveOffRequest.do", method = RequestMethod.POST)
-    public ModelAndView saveOffRequest(@ModelAttribute OffRequest offRequest) {
-        ModelAndView modelAndView = new ModelAndView("/offRequest/offRequest.do?ID=" + offRequest.getRequesterPerson().getID());
-        offRequestService.saveOffRequest(offRequest);
+    public ModelAndView saveOffRequest(@ModelAttribute OffRequestDTO offRequestDTO) {
+        ModelAndView modelAndView = new ModelAndView("/offRequest/offRequest.do?ID=" + offRequestDTO.getRequesterPerson().getID());
+        offRequestService.saveOffRequest(offRequestDTO);
         return modelAndView;
     }
 
     @RequestMapping(value = "/confirmOffRequest.do", method = RequestMethod.GET)
-    public ModelAndView confirmOffRequest(@ModelAttribute OffRequest offRequest) {
+    public ModelAndView confirmOffRequest(@ModelAttribute OffRequestDTO offRequestDTO) {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
-        offRequestService.confirmStatus(offRequest);
+        offRequestService.confirmStatus(offRequestDTO);
         return modelAndView;
     }
     @RequestMapping(value = "/rejectOffRequest.do", method = RequestMethod.GET)
-    public ModelAndView rejectOffRequest(@ModelAttribute OffRequest offRequest) {
+    public ModelAndView rejectOffRequest(@ModelAttribute OffRequestDTO offRequestDTO) {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
-        offRequestService.rejectStatus(offRequest);
+        offRequestService.rejectStatus(offRequestDTO);
         return modelAndView;
     }
 }

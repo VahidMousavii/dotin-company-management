@@ -1,6 +1,7 @@
 package ir.dotin.entity;
 
 
+import ir.dotin.to.OffRequestDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,16 @@ public class OffRequest extends ParentEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private SubCategory statusOfRequest;
+
+    public OffRequest(OffRequestDTO offRequestDTO){
+        super(offRequestDTO);
+        this.offDescription=offRequestDTO.getOffDescription();
+        this.offStartDate=offRequestDTO.getOffStartDate();
+        this.offEndDate=offRequestDTO.getOffEndDate();
+        this.requesterPerson=new Person(offRequestDTO.getRequesterPerson());
+        this.typeOfRequest=new SubCategory(offRequestDTO.getTypeOfRequest());
+        this.statusOfRequest=new SubCategory(offRequestDTO.getStatusOfRequest());
+    }
 
 }
 

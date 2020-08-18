@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,13 +36,14 @@ public class EmailService {
         return allEmails;
     }
 
-    public List<Email> loadReceivedEmailsByPersonID(Long personId) {
-        List<Email> receivedEmailsByPersonId = emailDA.loadReceivedEmailsByPersonId(personId);
+    public List<EmailDTO> loadReceivedEmailsByPersonID(Long personId) {
+        List<EmailDTO> receivedEmailsByPersonId = emailDA.loadReceivedEmailsByPersonId(personId);
+
         return receivedEmailsByPersonId;
     }
 
-    public List<Email> loadSentEmailsByPersonId(Long personId) {
-        List<Email> sentEmailsByPersonId = emailDA.loadSentEmailsByPersonId(personId);
+    public List<EmailDTO> loadSentEmailsByPersonId(Long personId) {
+        List<EmailDTO> sentEmailsByPersonId = emailDA.loadSentEmailsByPersonId(personId);
         return sentEmailsByPersonId;
     }
 

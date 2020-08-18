@@ -1,6 +1,7 @@
 package ir.dotin.repository;
 
 import ir.dotin.entity.Email;
+import ir.dotin.to.EmailDTO;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +19,8 @@ public class EmailDATest extends TestCase {
 
     @Test
     public void testLoadReceivedEmailsByPersonId() {
-        List<Email> emailList = emailDA.loadReceivedEmailsByPersonId(2L);
-        for (Email email : emailList) {
+        List<EmailDTO> emailList = emailDA.loadReceivedEmailsByPersonId(2L);
+        for (EmailDTO email : emailList) {
             System.out.println(email.getEmailContent());
             System.out.println("============");
         }
@@ -27,8 +28,8 @@ public class EmailDATest extends TestCase {
     }
     @Test
     public void testLoadSentEmailsByPersonId() {
-        List<Email> sentEmail = emailDA.loadSentEmailsByPersonId(2L);
-        for (Email email : sentEmail) {
+        List<EmailDTO> sentEmail = emailDA.loadSentEmailsByPersonId(2L);
+        for (EmailDTO email : sentEmail) {
             System.out.println(email.getEmailContent());
         }
     }

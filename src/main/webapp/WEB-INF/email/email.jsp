@@ -91,11 +91,11 @@
             </td>
             <td>
                 <p>صندوق دریافت</p>
-                <a href="/email/showInbox.do?ID=${person.ID}&active=true">Inbox</a>
+                <a href="/email/showInbox.do?ID=${senderPerson.ID}&active=true">Inbox</a>
             </td>
             <td>
                 <p>صندوق ارسال</p>
-                <a href="/email/showSentBox.do?ID=${person.ID}&active=true">SentBox</a>
+                <a href="/email/showSentBox.do?ID=${senderPerson.ID}&active=true">SentBox</a>
     </table>
 </form>
 

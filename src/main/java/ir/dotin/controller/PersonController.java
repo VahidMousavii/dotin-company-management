@@ -5,6 +5,8 @@ import ir.dotin.repository.PersonDA;
 import ir.dotin.entity.Person;
 import ir.dotin.service.CategoryService;
 import ir.dotin.service.PersonService;
+import ir.dotin.to.PersonDTO;
+import ir.dotin.to.SubCategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,7 @@ public class PersonController {
     public ModelAndView savePage() {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/addPerson.jsp");
         List<Person> managers = personService.loadManagers();
-        List<SubCategory> subCategories = categoryService.loadSubCategoriesByName("role");
+        List<SubCategoryDTO> subCategories = categoryService.loadSubCategoriesByName("role");
         modelAndView.addObject("managers", managers);
         modelAndView.addObject("roles", subCategories);
         return modelAndView;
@@ -48,7 +50,7 @@ public class PersonController {
     @RequestMapping("/update.do")
     public ModelAndView update(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/updatePerson.jsp");
-        Person loadedPerson = personService.loadPerson(person.getID());
+        PersonDTO loadedPerson = personService.loadPerson(person.getID());
         modelAndView.addObject("loadedPerson", loadedPerson);
         return modelAndView;
     }
@@ -83,9 +85,9 @@ public class PersonController {
     }
 
     @RequestMapping("/findAll.do")
-    public ModelAndView findAll(@ModelAttribute Person person) {
+    public ModelAndView findAll(@ModelAttribute PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/index.jsp");
-        List<Person> personList = personService.loadAllPerson(person);
+        List<PersonDTO> personList = personService.loadAllPerson(personDTO);
         modelAndView.addObject("persons", personList);
         return modelAndView;
     }

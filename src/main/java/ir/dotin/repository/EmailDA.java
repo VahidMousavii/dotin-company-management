@@ -2,6 +2,7 @@ package ir.dotin.repository;
 
 import ir.dotin.entity.Email;
 import ir.dotin.entity.Person;
+import ir.dotin.to.EmailDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -54,15 +55,20 @@ public class EmailDA {
         }
     }
 
-    public List<Email> loadReceivedEmailsByPersonId(Long personId) {
+    public List<EmailDTO> loadReceivedEmailsByPersonId(Long personId) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("select e from Email e join e.receiverPersons rp where rp.ID = :personID");
             query.setParameter("personID", personId);
+            List<Email> emailList = query.list();
+            List<EmailDTO> emailDTOS = new ArrayList<>();
+            for (Email email : emailList) {
+                EmailDTO emailDTO = new EmailDTO(email);
+                emailDTOS.add(emailDTO);
+            }
 
-
-            return query.list();
+            return emailDTOS;
         } finally {
             if (session != null) {
                 session.close();
@@ -70,7 +76,7 @@ public class EmailDA {
         }
     }
 
-    public List<Email> loadSentEmailsByPersonId(Long personId) {
+    public List<EmailDTO> loadSentEmailsByPersonId(Long personId) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
@@ -80,7 +86,12 @@ public class EmailDA {
             for (Email email : emails) {
                 Hibernate.initialize(email.getReceiverPersons());
             }
-            return emails;
+            List<EmailDTO> emailDTOS = new ArrayList<>();
+            for (Email email : emails) {
+                EmailDTO emailDTO = new EmailDTO(email);
+                emailDTOS.add(emailDTO);
+            }
+            return emailDTOS;
         } finally {
             if (session != null) {
                 session.close();

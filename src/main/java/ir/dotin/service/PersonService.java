@@ -4,6 +4,8 @@ import ir.dotin.entity.OffRequest;
 import ir.dotin.repository.OffRequestDA;
 import ir.dotin.repository.PersonDA;
 import ir.dotin.entity.Person;
+import ir.dotin.to.OffRequestDTO;
+import ir.dotin.to.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +19,16 @@ public class PersonService {
     @Autowired
     private OffRequestDA offRequestDA;
 
-    public Person loadPerson(Long id) {
-        Person loadedPerson = personDA.loadPerson(id);
+    public PersonDTO loadPerson(Long id) {
+        PersonDTO loadedPerson = personDA.loadPerson(id);
         return loadedPerson;
     }
 
-    public List<Person> loadAllPerson(Person person) {
-        if (person.getActive() == null) {
-            person.setActive(false);
+    public List<PersonDTO> loadAllPerson(PersonDTO personDTO) {
+        if (personDTO.getActive() == null) {
+            personDTO.setActive(false);
         }
-        List<Person> personList = personDA.findAll(person);
+        List<PersonDTO> personList = personDA.findAll(personDTO);
         return personList;
     }
 
@@ -62,9 +64,9 @@ public class PersonService {
         return loadedPerson;
     }
 
-    public List<OffRequest> findPendingOffRequestsOfManager(Person person) {
+    public List<OffRequestDTO> findPendingOffRequestsOfManager(PersonDTO person) {
 //        if (person.getRoleSubCategory().equals("manager")) {
-        List<OffRequest> pendingOffRequests = offRequestDA.findPendingOffRequestsOfManager(person.getID());
+        List<OffRequestDTO> pendingOffRequests = offRequestDA.findPendingOffRequestsOfManager(person.getID());
         return pendingOffRequests;
 //        }
 //        return pendingOffRequests;
