@@ -2,7 +2,10 @@ package ir.dotin.entity;
 
 
 import ir.dotin.to.OffRequestDTO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 

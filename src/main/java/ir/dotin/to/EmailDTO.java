@@ -6,11 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +23,10 @@ public class EmailDTO extends ParentEntityDTO implements Serializable {
     private List<PersonDTO> receiverPersons;
 
     private MultipartFile emailAttachment;
+
+    private String emailAttachmentName;
+
+    private String emailAttachmentLink;
 
     private String emailContent;
 
@@ -41,8 +43,10 @@ public class EmailDTO extends ParentEntityDTO implements Serializable {
             }
             this.receiverPersons = receiverPersonDTOs;
         }
-
+        //todo change this item lonely
         this.emailAttachment = null;
+        this.emailAttachmentLink = "someServlet.do" + email.getID();
+        this.emailAttachmentName = email.getEmailAttachmentName();
         this.emailContent = email.getEmailContent();
         this.emailSubject = email.getEmailSubject();
     }

@@ -2,6 +2,7 @@ package ir.dotin.service;
 
 import ir.dotin.entity.Email;
 import ir.dotin.repository.EmailDA;
+import ir.dotin.to.AttachedDTO;
 import ir.dotin.to.EmailDTO;
 import ir.dotin.to.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -29,6 +29,12 @@ public class EmailService {
         }
         Email email = new Email(emailDTO);
         emailDA.addEmail(email);
+    }
+
+    public AttachedDTO getEmailAttached(EmailDTO emailDTO) throws SQLException {
+
+        AttachedDTO emailAttached = emailDA.getEmailAttached(emailDTO.getID());
+        return emailAttached;
     }
 
     public List<Email> findAll() {

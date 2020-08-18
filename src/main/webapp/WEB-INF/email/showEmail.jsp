@@ -34,6 +34,9 @@
         </tr>
         <tr>
             <td>
+                <a href="/email/downloadAttached.do?ID=${recEmail.ID}">ذانلوذ</a>
+            </td>
+            <td>
                 <textarea id="receivedEmailContent" name="emailContent" class="special-text" rows="5" cols="50">
                         ${recEmail.emailContent}
                 </textarea>
@@ -49,9 +52,12 @@
         </c:if>
         <c:forEach items="${sentEmails}" var="sentEmail">
             <tr>
+                <td><label for="sentEmailSubject">عنوان</label></td>
                 <td>
-                    <label for="sentEmailSubject">عنوان</label>
                     <input type="text" id="sentEmailSubject" disabled value="${sentEmail.emailSubject}">
+                </td>
+                <td>
+                   <a href="/email/downloadAttached.do?ID=${sentEmail.ID}">ذانلوذ</a>
                 </td>
                 <td>
                     <c:forEach items="${sentEmail.receiverPersons}" var="recPer">

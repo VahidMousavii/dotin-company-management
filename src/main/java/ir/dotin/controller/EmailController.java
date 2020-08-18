@@ -1,9 +1,9 @@
 package ir.dotin.controller;
 
-import ir.dotin.entity.Email;
 import ir.dotin.entity.Person;
 import ir.dotin.service.EmailService;
 import ir.dotin.service.PersonService;
+import ir.dotin.to.AttachedDTO;
 import ir.dotin.to.EmailDTO;
 import ir.dotin.to.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -39,11 +41,21 @@ public class EmailController {
 
     }
 
-    @RequestMapping(value = "/saveEmail.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/saveEmail.do", method = RequestMethod.POST)
     public ModelAndView saveEmail(@ModelAttribute EmailDTO emailDTO) throws IOException, SQLException {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
         emailService.saveEmail(emailDTO);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/downloadAttached.do")
+    public void getAttached(@ModelAttribute EmailDTO emailDTO, HttpServletResponse response) throws SQLException, IOException {
+        AttachedDTO emailAttached = this.emailService.getEmailAttached(emailDTO);
+        emailService.getEmailAttached(emailDTO);
+        response.setHeader("Content-Disposition", "attachment; filename=" + emailAttached.getFileName());
+        org.apache.commons.io.IOUtils.copy(new ByteArrayInputStream(emailAttached.getBytes()), response.getOutputStream());
+
+        response.flushBuffer();
     }
 
     @RequestMapping("/showSentBox.do")

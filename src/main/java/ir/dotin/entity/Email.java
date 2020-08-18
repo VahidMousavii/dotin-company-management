@@ -35,8 +35,8 @@ public class Email extends ParentEntity {
     @Column(name = "c_email_attachment")
     private Blob emailAttachment;
     //todo add name attached file
-   /* @Column(name = "c_email_attachment_name")
-    private String emailAttachmentName;*/
+    @Column(name = "c_email_attachment_name")
+    private String emailAttachmentName;
     @Column(name = "c_email_content")
     private String emailContent;
     @Column(name = "c_email_subject")
@@ -53,6 +53,7 @@ public class Email extends ParentEntity {
             }
         }
         this.emailAttachment = new SerialBlob(emailDTO.getEmailAttachment().getBytes());
+        this.emailAttachmentName = emailDTO.getEmailAttachment().getOriginalFilename();
         this.emailContent = emailDTO.getEmailContent();
         this.emailSubject = emailDTO.getEmailSubject();
     }

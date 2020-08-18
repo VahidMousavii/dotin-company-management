@@ -2,12 +2,14 @@ package ir.dotin.repository;
 
 import ir.dotin.entity.Email;
 import ir.dotin.entity.Person;
+import ir.dotin.to.AttachedDTO;
 import ir.dotin.to.EmailDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,21 @@ public class EmailDA {
             email.setSenderPerson(lodedSenderPerson);
             session.save(email);
             tx.commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public AttachedDTO getEmailAttached(Long emailId) throws SQLException {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Email email = session.get(Email.class, emailId);
+            byte[] bytes = email.getEmailAttachment().getBytes(1, (int) email.getEmailAttachment().length());
+            AttachedDTO attachedDTO = new AttachedDTO(bytes, email.getEmailAttachmentName());
+            return attachedDTO;
         } finally {
             if (session != null) {
                 session.close();
