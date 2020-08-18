@@ -43,8 +43,6 @@ public class EmailDTO extends ParentEntityDTO implements Serializable {
             }
             this.receiverPersons = receiverPersonDTOs;
         }
-        //todo change this item lonely
-        this.emailAttachment = null;
         this.emailAttachmentLink = "someServlet.do" + email.getID();
         this.emailAttachmentName = email.getEmailAttachmentName();
         this.emailContent = email.getEmailContent();

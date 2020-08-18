@@ -149,11 +149,6 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             loadedPerson = session.get(Person.class, id);
-            //todo refactor
-//            Hibernate.initialize(loadedPerson.getSentEmails());
-//            for (Email sentEmail : loadedPerson.getSentEmails()) {
-//                Hibernate.initialize(sentEmail.getReceiverPersons());
-//            }
         } finally {
             if (session != null) {
                 session.close();

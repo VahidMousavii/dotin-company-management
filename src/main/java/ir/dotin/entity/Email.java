@@ -34,7 +34,6 @@ public class Email extends ParentEntity {
     @Lob
     @Column(name = "c_email_attachment")
     private Blob emailAttachment;
-    //todo add name attached file
     @Column(name = "c_email_attachment_name")
     private String emailAttachmentName;
     @Column(name = "c_email_content")
