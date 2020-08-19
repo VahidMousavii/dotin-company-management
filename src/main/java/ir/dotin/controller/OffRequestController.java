@@ -47,7 +47,6 @@ public class OffRequestController {
         modelAndView.addObject("person", loadedPerson);
         modelAndView.addObject("pendingOffRequestsOfManager", pendingOffRequestsOfManager);
         return modelAndView;
-
     }
 
     @RequestMapping(value = "/saveOffRequest.do", method = RequestMethod.POST)

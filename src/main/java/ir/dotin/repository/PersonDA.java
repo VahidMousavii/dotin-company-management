@@ -24,9 +24,11 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Person loadedDirectManagerPerson = session.load(Person.class, person.getDirectManager().getID());
+            if (person.getDirectManager()!=null){
+                Person loadedDirectManagerPerson = session.load(Person.class, person.getDirectManager().getID());
+                person.setDirectManager(loadedDirectManagerPerson);
+            }
             SubCategory loadSubCat = session.load(SubCategory.class, person.getRoleSubCategory().getID());
-            person.setDirectManager(loadedDirectManagerPerson);
             person.setRoleSubCategory(loadSubCat);
             session.save(person);
             tx.commit();
