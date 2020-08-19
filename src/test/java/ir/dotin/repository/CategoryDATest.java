@@ -20,9 +20,9 @@ public class CategoryDATest extends TestCase {
 
     @Test
     public void testFindSubCategoryByName() {
-        SubCategoryDTO rejected = categoryDA.findSubCategoryByName("rejected");
+/*        SubCategoryDTO rejected = categoryDA.findSubCategoryByName("rejected");
         System.out.println(rejected.getMainCategory().getCategoryName());
-        System.out.println(rejected.getSubCategoryName());
+        System.out.println(rejected.getSubCategoryName());*/
 
     }
 }

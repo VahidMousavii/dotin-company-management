@@ -15,12 +15,8 @@ public class CategoryService {
     @Autowired
     CategoryDA categoryDA;
 
-    public Category loadCategoryById2(Long categoryId) {
-        Category categoryById = categoryDA.findCategoryById(categoryId);
-        return categoryById;
-    }
     public List<SubCategoryDTO> loadSubCategoriesByName(String categoryName) {
-        List<SubCategoryDTO> subCategoryList = categoryDA.findSubCategoriesByName(categoryName);
+        List<SubCategoryDTO> subCategoryList = categoryDA.findSubCategoriesByCategoryName(categoryName);
         return subCategoryList;
     }
 

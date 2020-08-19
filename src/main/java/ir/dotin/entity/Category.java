@@ -37,7 +37,6 @@ public class Category extends ParentEntity {
             this.subCategories = subCategories;
         }
 
-
     }
 
 

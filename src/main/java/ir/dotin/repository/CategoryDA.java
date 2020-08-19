@@ -32,23 +32,6 @@ public class CategoryDA {
         }
     }
 
-    public SubCategory findByName(String name) {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            Query query = session.createQuery("from t_subCategory sc where sc.subCategoryName like :name");
-            query.setParameter("name", name);
-            SubCategory subCategory = (SubCategory) query.uniqueResult();
-//            Hibernate.initialize(subCategory.getOffRequestList());
-            return subCategory;
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-
-    }
-
     public Category findCategoryById(Long id) {
         Session session = null;
         try {
@@ -65,20 +48,23 @@ public class CategoryDA {
         }
     }
 
-    public List<SubCategoryDTO> findSubCategoriesByName(String categoryName) {
+    public List<SubCategoryDTO> findSubCategoriesByCategoryName(String categoryName) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from Category c where c.categoryName like :categoryName");
             query.setParameter("categoryName", categoryName);
             Category category = (Category) query.uniqueResult();
-            Hibernate.initialize(category.getSubCategories());
-            List<SubCategory> subCategories = category.getSubCategories();
+            List<SubCategoryDTO> subCategoryDTOS = null;
+            if (category != null) {
+                subCategoryDTOS = new ArrayList<>();
+                Hibernate.initialize(category.getSubCategories());
+                List<SubCategory> subCategories = category.getSubCategories();
 
-            List<SubCategoryDTO> subCategoryDTOS = new ArrayList<>();
-            for (SubCategory subCategory : subCategories) {
-                SubCategoryDTO subCategoryDTO = new SubCategoryDTO(subCategory);
-                subCategoryDTOS.add(subCategoryDTO);
+                for (SubCategory subCategory : subCategories) {
+                    SubCategoryDTO subCategoryDTO = new SubCategoryDTO(subCategory);
+                    subCategoryDTOS.add(subCategoryDTO);
+                }
             }
 
             return subCategoryDTOS;

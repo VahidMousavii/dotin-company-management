@@ -86,6 +86,8 @@ public class PersonController {
 
     @RequestMapping("/findAll.do")
     public ModelAndView findAll(@ModelAttribute PersonDTO personDTO) {
+        PersonDTO personDTO1 = new PersonDTO();
+        personDTO1.getEmployees().get(0);
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/index.jsp");
         List<PersonDTO> personList = personService.loadAllPerson(personDTO);
         modelAndView.addObject("persons", personList);
