@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
     <c:if test="${isSent == true}">
         <title>SENT BOX</title>
     </c:if>
@@ -13,41 +14,58 @@
 </head>
 
 <body>
+<div class="topnav">
+    <a href="/person/findAll.do?active=1">صفحه اصلی</a>
+    <a href="/person/savePage.do">ایجاد کاربر</a>
+    <a href="/offRequest/offRequest.do?ID=${person.ID}">مرخصی</a>
+    <a href="/person/update.do?ID=${person.ID}">بروز رسانی</a>
+    <a href="/email/email.do?ID=${person.ID}">ارسال ایمیل</a>
+    <a href="/email/showInbox.do?ID=${person.ID}&active=true"  <c:if test="${isSent!=true}"> class="active"</c:if>>صندوق
+        دریافت</a>
 
-<table class="table table-striped">
-    <c:if test="${receivedEmails.size()==0}">
-        <p>ایمیلی برای نمایش وجود ندارد</p>
-    </c:if>
-    <c:if test="${receivedEmails.size()==null}">
-        <p>ایمیلی برای نمایش وجود ندارد</p>
-    </c:if>
-    <c:forEach items="${receivedEmails}" var="recEmail">
-        <tr>
-            <td>
-                <label for="emailsubject">عنوان ایمیل</label>
-                <input type="text" id="emailsubject" disabled value="${recEmail.emailSubject}">
-            </td>
-            <td>
-                <label for="senderPerson">ارسال کننده</label>
-                <input type="text" id="senderPerson" disabled value="${recEmail.senderPerson.personName}">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="/email/downloadAttached.do?ID=${recEmail.ID}">ذانلوذ</a>
-            </td>
-            <td>
+    <a href="/email/showSentBox.do?ID=${person.ID}&active=true" <c:if test="${isSent==true}"> class="active"</c:if> >صندوق
+        ارسال</a>
+
+</div>
+<c:if test="${isSent!=true}">
+    <table class="table table-striped">
+
+        <c:if test="${receivedEmails.size()==0}">
+            <p>ایمیلی برای نمایش وجود ندارد</p>
+        </c:if>
+        <c:if test="${receivedEmails.size()==null}">
+            <p>ایمیلی برای نمایش وجود ندارد</p>
+        </c:if>
+        <c:forEach items="${receivedEmails}" var="recEmail">
+            <tr>
+                <td>
+                    <label for="emailsubject">عنوان ایمیل</label>
+                    <input type="text" id="emailsubject" disabled value="${recEmail.emailSubject}">
+                </td>
+                <td>
+                    <label for="senderPerson">ارسال کننده</label>
+                    <input type="text" id="senderPerson" disabled value="${recEmail.senderPerson.personName}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="/email/downloadAttached.do?ID=${recEmail.ID}">ذانلوذ</a>
+                </td>
+                <td>
                 <textarea id="receivedEmailContent" name="emailContent" class="special-text" rows="5" cols="50">
                         ${recEmail.emailContent}
                 </textarea>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
-
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
 <c:if test="${isSent==true}">
     <table>
         <c:if test="${sentEmails.size()==0}">
+            <p>ایمیلی برای نمایش وجود ندارد</p>
+        </c:if>
+        <c:if test="${sentEmails.size()==null}">
             <p>ایمیلی برای نمایش وجود ندارد</p>
         </c:if>
         <c:forEach items="${sentEmails}" var="sentEmail">
@@ -57,7 +75,7 @@
                     <input type="text" id="sentEmailSubject" disabled value="${sentEmail.emailSubject}">
                 </td>
                 <td>
-                   <a href="/email/downloadAttached.do?ID=${sentEmail.ID}">ذانلوذ</a>
+                    <a href="/email/downloadAttached.do?ID=${sentEmail.ID}">ذانلوذ</a>
                 </td>
                 <td>
                     <c:forEach items="${sentEmail.receiverPersons}" var="recPer">

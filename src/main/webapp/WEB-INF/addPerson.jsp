@@ -14,6 +14,7 @@
           rel="stylesheet">
     <link href="css/custom.css"
           rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
     <style>
         .center {
             margin: auto;
@@ -30,6 +31,10 @@
         }
     </style>
 </head>
+<div class="topnav">
+    <a  href="/person/findAll.do?active=1">صفحه اصلی</a>
+    <a class="active" href="/person/savePage.do">ایجاد کاربر</a>
+</div>
 <div class="center">
     <p class="pcenter">افزودن کاربر</p>
     <form action="/person/save.do" method="post">

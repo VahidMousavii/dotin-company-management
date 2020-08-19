@@ -63,6 +63,7 @@ public class EmailController {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
         List<EmailDTO> sentEmails = emailService.loadSentEmailsByPersonId(personDTO.getID());
         modelAndView.addObject("sentEmails", sentEmails);
+        modelAndView.addObject("person", personDTO);
         modelAndView.addObject("isSent", true);
         return modelAndView;
     }
@@ -71,6 +72,7 @@ public class EmailController {
     public ModelAndView showInbox(@ModelAttribute PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
         List<EmailDTO> receivedEmails = emailService.loadReceivedEmailsByPersonID(personDTO.getID());
+        modelAndView.addObject("person", personDTO);
         modelAndView.addObject("receivedEmails", receivedEmails);
         modelAndView.addObject("isSent", false);
         return modelAndView;

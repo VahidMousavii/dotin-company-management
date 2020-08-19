@@ -6,8 +6,18 @@
 <head>
     <title>UPDATE PERSON PAGE</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
 </head>
 <body>
+<div class="topnav">
+    <a href="/person/findAll.do?active=1">صفحه اصلی</a>
+    <a href="/person/savePage.do">ایجاد کاربر</a>
+    <a href="/offRequest/offRequest.do?ID=${loadedPerson.ID}">مرخصی</a>
+    <a href="#" class="active">بروز رسانی</a>
+    <a href="/email/email.do?ID=${person.ID}" >ارسال ایمیل</a>
+    <a href="/email/showInbox.do?ID=${loadedPerson.ID}&active=true">صندوق دریافت</a>
+    <a href="/email/showSentBox.do?ID=${loadedPerson.ID}&active=true">صندوق ارسال</a>
+</div>
 <form action="/person/saveUpdate.do">
     <tr>
         <td><input type="hidden" name="ID" value="${loadedPerson.ID}"/></td>

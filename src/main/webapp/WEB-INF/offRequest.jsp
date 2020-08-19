@@ -6,10 +6,19 @@
     <title>OFF REQUEST PAGE</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
 </head>
+<body>
+<div class="topnav">
+    <a href="/person/findAll.do?active=1">صفحه اصلی</a>
+    <a href="/person/savePage.do">ایجاد کاربر</a>
+    <a href="#" class="active">مرخصی</a>
+    <a href="/person/update.do?ID=${person.ID}">بروز رسانی</a>
+    <a href="/email/email.do?ID=${person.ID}">ارسال ایمیل</a>
+    <a href="/email/showInbox.do?ID=${person.ID}&active=true">صندوق دریافت</a>
+    <a href="/email/showSentBox.do?ID=${person.ID}&active=true">صندوق ارسال</a>
+</div>
 <div class="box-table">
-    <a href="/person/findAll.do?active=1">برگشت به صفحه اصلی</a>
-    <br><br>
     <form action="/offRequest/saveOffRequest.do" method="post">
 
         <p>ایجاد درخواست مرخصی جدید</p>
@@ -105,7 +114,8 @@
                     <td>
                         <a href="/offRequest/confirmOffRequest.do?ID=${pendingOffRequestOfManager.ID}">تایید</a>
                     </td>
-                    <td><a href="/offRequest/rejectOffRequest.do?ID=${pendingOffRequestOfManager.ID}">رد درخواست مرخصی</a></td>
+                    <td><a href="/offRequest/rejectOffRequest.do?ID=${pendingOffRequestOfManager.ID}">رد درخواست
+                        مرخصی</a></td>
                 </tr>
             </c:forEach>
         </table>
