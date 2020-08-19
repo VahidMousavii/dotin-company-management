@@ -18,24 +18,24 @@ import java.util.List;
 @AllArgsConstructor
 public class Person extends ParentEntity {
 
-    @Column(name = "c_personFamily")
+    @Column(name = "c_personfamily")
     private String personFamily;
-    @Column(name = "c_personName")
+    @Column(name = "c_personname")
     private String personName;
-    @Column(name = "c_personPhone")
+    @Column(name = "c_personphone")
     private String personPhone;
-    @Column(name = "c_nationalCode")
+    @Column(name = "c_nationalcode")
     private String nationalCode;
-    @Column(name = "c_personnelCode")
+    @Column(name = "c_personnelcode")
     private String personnelCode;
     @ManyToOne
-    @JoinColumn(name = "c_person_directManager_id")
+    @JoinColumn(name = "c_persondirectmanagerid")
     private Person directManager;
     //Self-Join
     @OneToMany(mappedBy = "directManager", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Person> employees;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "c_role_subcategory")
+    @JoinColumn(name = "c_rolesubcategory")
     private SubCategory roleSubCategory;
 
     public Person(PersonDTO personDTO) {

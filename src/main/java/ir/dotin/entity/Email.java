@@ -24,21 +24,21 @@ import java.util.List;
 public class Email extends ParentEntity {
 
     @ManyToOne
-    @JoinColumn(name = "c_sender_person_ID")
+    @JoinColumn(name = "c_senderpersonid")
     private Person senderPerson;
     @ManyToMany
     @JoinTable(name = "t_emailreceiverperson"
-            , joinColumns = {@JoinColumn(name = "C_EMAIL_ID")}
-            , inverseJoinColumns = {@JoinColumn(name = "C_PERSON_ID")})
+            , joinColumns = {@JoinColumn(name = "c_emailid")}
+            , inverseJoinColumns = {@JoinColumn(name = "c_personid")})
     private List<Person> receiverPersons;
     @Lob
-    @Column(name = "c_email_attachment")
+    @Column(name = "c_emailattachment")
     private Blob emailAttachment;
-    @Column(name = "c_email_attachment_name")
+    @Column(name = "c_emailattachmentname")
     private String emailAttachmentName;
-    @Column(name = "c_email_content")
+    @Column(name = "c_emailcontent")
     private String emailContent;
-    @Column(name = "c_email_subject")
+    @Column(name = "c_emailsubject")
     private String emailSubject;
 
     public Email(EmailDTO emailDTO) throws IOException, SQLException {

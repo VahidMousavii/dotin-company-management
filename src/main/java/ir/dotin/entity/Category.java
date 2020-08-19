@@ -18,10 +18,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category extends ParentEntity {
-    @Column(name = "c_category_name")
+    @Column(name = "c_categoryname")
     private String categoryName;
 
-    @JoinColumn(name = "c_main_category_id")
+    @JoinColumn(name = "c_maincategoryid")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SubCategory> subCategories;
 

@@ -23,7 +23,7 @@ public class ParentEntity {
     @Column(name = "c_version")
     @Version
     private Long version;
-    @Column(name = "c_creationDate")
+    @Column(name = "c_creationdate")
     private String creationDate;
     @Column(name = "c_active")
     private Boolean active;

@@ -17,20 +17,23 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class OffRequest extends ParentEntity {
 
-    @Column(name = "c_off_description")
+    @Column(name = "c_offdescription")
     private String offDescription;
-    @Column(name = "c_off_startDate")
+    @Column(name = "c_offstartdate")
     private String offStartDate;
-    @Column(name = "c_off_endDate")
+    @Column(name = "c_offenddate")
     private String offEndDate;
 
+    @JoinColumn(name = "c_requestpersonid")
     @ManyToOne(cascade = CascadeType.ALL)
     private Person requesterPerson;
 
+    @JoinColumn(name = "c_typeofrequest")
     @ManyToOne(cascade = CascadeType.ALL)
     private SubCategory typeOfRequest;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "c_statusofrequest")
     private SubCategory statusOfRequest;
 
     public OffRequest(OffRequestDTO offRequestDTO){

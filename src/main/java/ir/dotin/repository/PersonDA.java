@@ -96,24 +96,6 @@ public class PersonDA {
         }
     }
 
-    public void deleteByID(Long id) {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("delete from Person tp where tp.ID = :ID");
-            query.setParameter("ID", id);
-            query.executeUpdate();
-            tx.commit();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-
-    }
-
     public List<Person> findByName(String name) {
         Session session = null;
         try {

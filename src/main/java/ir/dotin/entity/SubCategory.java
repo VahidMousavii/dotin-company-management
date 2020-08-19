@@ -16,14 +16,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class SubCategory extends ParentEntity {
 
-    @Column(name = "c_subCategoryName")
+    @Column(name = "c_subcategoryname")
     private String subCategoryName;
-    @Column(name = "c_subCategoryFarsiName")
+    @Column(name = "c_subcategoryfarsiname")
     private String subCategoryFarsiName;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "c_main_category_id")
+    @JoinColumn(name = "c_maincategoryid")
     private Category mainCategory;
 
     public SubCategory(SubCategoryDTO subCategoryDTO) {
