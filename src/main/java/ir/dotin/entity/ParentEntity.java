@@ -27,11 +27,14 @@ public class ParentEntity {
     private String creationDate;
     @Column(name = "c_active")
     private Boolean active;
+    @Column(name = "c_enable")
+    private Boolean enable;
 
     public ParentEntity(ParentEntityDTO parentEntityDTO) {
         this.ID = parentEntityDTO.getID();
         this.active = parentEntityDTO.getActive();
         this.version = parentEntityDTO.getVersion();
         this.creationDate = parentEntityDTO.getCreationDate();
+        this.enable = parentEntityDTO.getEnable();
     }
 }
