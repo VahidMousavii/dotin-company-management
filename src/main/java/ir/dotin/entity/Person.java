@@ -45,6 +45,7 @@ public class Person extends ParentEntity {
         this.personPhone = personDTO.getPersonPhone();
         this.nationalCode = personDTO.getNationalCode();
         this.personnelCode = personDTO.getPersonnelCode();
+        this.roleSubCategory = new SubCategory(personDTO.getRoleSubCategory());
         if (personDTO.getDirectManager() != null) {
             this.directManager = new Person(personDTO.getDirectManager());
         }

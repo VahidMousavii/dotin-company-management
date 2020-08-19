@@ -36,11 +36,11 @@ public class OffRequestController {
     private OffRequestService offRequestService;
 
     @RequestMapping("/offRequest.do")
-    public ModelAndView showOffRequest(@ModelAttribute PersonDTO person) {
+    public ModelAndView showOffRequest(@ModelAttribute PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/offRequest.jsp");
-        List<OffRequestDTO> offRequestList = offRequestService.getOffRequestListByPersonId(person.getID());
+        List<OffRequestDTO> offRequestList = offRequestService.getOffRequestListByPersonId(personDTO.getID());
         List<SubCategoryDTO> offRequestType = categoryService.loadSubCategoriesByName("typeOfRequest");
-        PersonDTO loadedPerson = personService.loadPerson(person.getID());
+        PersonDTO loadedPerson = personService.loadPerson(personDTO.getID());
         List<OffRequestDTO> pendingOffRequestsOfManager = personService.findPendingOffRequestsOfManager(loadedPerson);
         modelAndView.addObject("offRequests", offRequestList);
         modelAndView.addObject("offRequestType", offRequestType);

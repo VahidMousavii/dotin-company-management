@@ -35,13 +35,12 @@ public class OffRequestDATest extends TestCase {
             System.out.println(offRequest.getID());
             System.out.println(offRequest.getOffDescription());
         }
-
     }
 
     @Test
     public void testConfirm() {
-        OffRequestDTO offRequest = new OffRequestDTO();
+        /*OffRequestDTO offRequest = new OffRequestDTO();
         offRequest.setID(1L);
-        offRequestDA.confirm(offRequest);
+        offRequestDA.confirm(offRequest);*/
     }
 }

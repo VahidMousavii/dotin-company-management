@@ -59,18 +59,18 @@ public class EmailController {
     }
 
     @RequestMapping("/showSentBox.do")
-    public ModelAndView showSentBox(@ModelAttribute Person person) {
+    public ModelAndView showSentBox(@ModelAttribute PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
-        List<EmailDTO> sentEmails = emailService.loadSentEmailsByPersonId(person.getID());
+        List<EmailDTO> sentEmails = emailService.loadSentEmailsByPersonId(personDTO.getID());
         modelAndView.addObject("sentEmails", sentEmails);
         modelAndView.addObject("isSent", true);
         return modelAndView;
     }
 
     @RequestMapping("/showInbox.do")
-    public ModelAndView showInbox(@ModelAttribute Person person) {
+    public ModelAndView showInbox(@ModelAttribute PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/email/showEmail.jsp");
-        List<EmailDTO> receivedEmails = emailService.loadReceivedEmailsByPersonID(person.getID());
+        List<EmailDTO> receivedEmails = emailService.loadReceivedEmailsByPersonID(personDTO.getID());
         modelAndView.addObject("receivedEmails", receivedEmails);
         modelAndView.addObject("isSent", false);
         return modelAndView;

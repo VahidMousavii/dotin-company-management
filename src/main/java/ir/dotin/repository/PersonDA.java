@@ -24,7 +24,7 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            if (person.getDirectManager()!=null){
+            if (person.getDirectManager() != null) {
                 Person loadedDirectManagerPerson = session.load(Person.class, person.getDirectManager().getID());
                 person.setDirectManager(loadedDirectManagerPerson);
             }
@@ -61,14 +61,19 @@ public class PersonDA {
         }
     }
 
-    public List<Person> findAllActiveManagers() {
+    public List<PersonDTO> findAllActiveManagers() {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from Person tp where tp.roleSubCategory.subCategoryName like :managerRole and tp.active = true");
             query.setParameter("managerRole", "manager");
             List<Person> list = query.list();
-            return list;
+
+            List<PersonDTO> personDTOS = new ArrayList<>();
+            for (Person person : list) {
+                personDTOS.add(new PersonDTO(person));
+            }
+            return personDTOS;
         } finally {
             if (session != null) {
                 session.close();
@@ -127,7 +132,7 @@ public class PersonDA {
 
     }
 
-    public Person loadPersonWithSentEmails(Long id) {
+    public PersonDTO loadPersonWithSentEmails(Long id) {
         Session session = null;
         Person loadedPerson;
         try {
@@ -138,7 +143,7 @@ public class PersonDA {
                 session.close();
             }
         }
-        return loadedPerson;
+        return new PersonDTO(loadedPerson);
     }
 
 
@@ -161,12 +166,12 @@ public class PersonDA {
         }
     }
 
-    public void active(Person person) {
+    public void active(PersonDTO personDTO) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Person loadedPerson = (Person) session.get(Person.class, person.getID());
+            Person loadedPerson = (Person) session.get(Person.class, personDTO.getID());
             loadedPerson.setActive(true);
             session.saveOrUpdate(loadedPerson);
             tx.commit();
@@ -177,12 +182,12 @@ public class PersonDA {
         }
     }
 
-    public void deactivate(Person person) {
+    public void deactivate(PersonDTO personDTO) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Person loadedPerson = (Person) session.get(Person.class, person.getID());
+            Person loadedPerson = session.get(Person.class, personDTO.getID());
             loadedPerson.setActive(false);
             session.saveOrUpdate(loadedPerson);
             tx.commit();

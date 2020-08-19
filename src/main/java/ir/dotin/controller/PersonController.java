@@ -1,6 +1,7 @@
 package ir.dotin.controller;
 
 import ir.dotin.entity.SubCategory;
+import ir.dotin.exception.DotinException;
 import ir.dotin.repository.PersonDA;
 import ir.dotin.entity.Person;
 import ir.dotin.service.CategoryService;
@@ -32,7 +33,7 @@ public class PersonController {
     @RequestMapping(value = "/savePage.do")
     public ModelAndView savePage() {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/addPerson.jsp");
-        List<Person> managers = personService.loadManagers();
+        List<PersonDTO> managers = personService.loadManagers();
         List<SubCategoryDTO> subCategories = categoryService.loadSubCategoriesByName("role");
         modelAndView.addObject("managers", managers);
         modelAndView.addObject("roles", subCategories);
@@ -40,9 +41,9 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/save.do", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute Person person) {
+    public ModelAndView save(@ModelAttribute PersonDTO personDTO) throws DotinException {
         ModelAndView modelAndView = new ModelAndView();
-        personService.save(person);
+        personService.save(personDTO);
         modelAndView.setViewName("/person/findAll.do?active=1");
         return modelAndView;
     }
@@ -56,31 +57,24 @@ public class PersonController {
     }
 
     @RequestMapping("/saveUpdate.do")
-    public ModelAndView saveUpdate(@ModelAttribute Person person) {
+    public ModelAndView saveUpdate(@ModelAttribute PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
-        personService.update(person);
-        modelAndView.addObject(person);
+        personService.update(personDTO);
+        modelAndView.addObject(personDTO);
         return modelAndView;
     }
 
-    /*@RequestMapping("/delete.do")
-    public String delete(@ModelAttribute Person person) throws Exception {
-        personDA.deleteByID(person.getID());
-        return "redirect:/person/findAll.do";
-    }*/
-
     @RequestMapping("/active.do")
-    public ModelAndView active(Person person) {
+    public ModelAndView active(PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
-        personService.active(person);
+        personService.active(personDTO);
         return modelAndView;
-
     }
 
     @RequestMapping("/deactivate.do")
-    public ModelAndView deactivate(@ModelAttribute Person person) {
+    public ModelAndView deactivate(@ModelAttribute PersonDTO personDTO) {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
-        personService.deactivate(person);
+        personService.deactivate(personDTO);
         return modelAndView;
     }
 
