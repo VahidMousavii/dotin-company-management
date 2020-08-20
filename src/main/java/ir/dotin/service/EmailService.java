@@ -1,6 +1,7 @@
 package ir.dotin.service;
 
 import ir.dotin.entity.Email;
+import ir.dotin.exception.DotinException;
 import ir.dotin.repository.EmailDA;
 import ir.dotin.to.AttachedDTO;
 import ir.dotin.to.EmailDTO;
@@ -41,9 +42,12 @@ public class EmailService {
         emailDA.addEmail(email);
     }
 
-    public AttachedDTO getEmailAttached(EmailDTO emailDTO) throws SQLException {
+    public AttachedDTO getEmailAttached(EmailDTO emailDTO) throws SQLException, DotinException {
 
         AttachedDTO emailAttached = emailDA.getEmailAttached(emailDTO.getID());
+        if (emailAttached==null){
+            throw new DotinException("فایل پیوست وجود ندارد");
+        }
         return emailAttached;
     }
 

@@ -49,7 +49,9 @@
             </tr>
             <tr>
                 <td>
-                    <a href="/email/downloadAttached.do?ID=${recEmail.ID}">دانلود</a>
+                    <c:if test="${recEmail.emailAttachmentName != null}">
+                        <a href="/email/downloadAttached.do?ID=${recEmail.ID}">دانلود</a>
+                    </c:if>
                 </td>
                 <td>
                 <textarea id="receivedEmailContent" name="emailContent" class="special-text" rows="5" cols="50">
@@ -75,7 +77,9 @@
                     <input type="text" id="sentEmailSubject" disabled value="${sentEmail.emailSubject}">
                 </td>
                 <td>
-                    <a href="/email/downloadAttached.do?ID=${sentEmail.ID}">دانلود</a>
+                    <c:if test="${sentEmail.emailAttachmentName != null}">
+                        <a href="/email/downloadAttached.do?ID=${sentEmail.ID}">دانلود</a>
+                    </c:if>
                 </td>
                 <td>
                     <c:forEach items="${sentEmail.receiverPersons}" var="recPer">

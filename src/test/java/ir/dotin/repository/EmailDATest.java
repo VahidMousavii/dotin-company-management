@@ -20,11 +20,14 @@ public class EmailDATest extends TestCase {
     @Test
     public void testLoadReceivedEmailsByPersonId() {
         List<Email> emailList = emailDA.loadReceivedEmailsByPersonId(2L);
-        for (Email email : emailList) {
+        /*for (Email email : emailList) {
             System.out.println(email.getEmailContent());
             System.out.println("============");
-        }
+        }*/
 
+        System.out.println(emailList.get(0).getEmailContent());
+        System.out.println(emailList);
+        System.out.println(emailList);
     }
     @Test
     public void testLoadSentEmailsByPersonId() {

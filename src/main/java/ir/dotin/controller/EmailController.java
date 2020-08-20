@@ -1,6 +1,7 @@
 package ir.dotin.controller;
 
 import ir.dotin.entity.Person;
+import ir.dotin.exception.DotinException;
 import ir.dotin.service.EmailService;
 import ir.dotin.service.PersonService;
 import ir.dotin.to.AttachedDTO;
@@ -49,7 +50,7 @@ public class EmailController {
     }
 
     @RequestMapping(value = "/downloadAttached.do")
-    public void getAttached(@ModelAttribute EmailDTO emailDTO, HttpServletResponse response) throws SQLException, IOException {
+    public void getAttached(@ModelAttribute EmailDTO emailDTO, HttpServletResponse response) throws SQLException, IOException, DotinException {
         AttachedDTO emailAttached = this.emailService.getEmailAttached(emailDTO);
         emailService.getEmailAttached(emailDTO);
         response.setHeader("Content-Disposition", "attachment; filename=" + emailAttached.getFileName());

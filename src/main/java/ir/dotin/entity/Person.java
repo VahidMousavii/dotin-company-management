@@ -28,10 +28,10 @@ public class Person extends ParentEntity {
     private String nationalCode;
     @Column(name = "c_personnelcode")
     private String personnelCode;
+    //Self-Join
     @ManyToOne
     @JoinColumn(name = "c_persondirectmanagerid")
     private Person directManager;
-    //Self-Join
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "c_rolesubcategory")
     private SubCategory roleSubCategory;

@@ -3,7 +3,6 @@ package ir.dotin.repository;
 import ir.dotin.entity.Email;
 import ir.dotin.entity.Person;
 import ir.dotin.to.AttachedDTO;
-import ir.dotin.to.EmailDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -46,8 +45,12 @@ public class EmailDA {
         try {
             session = sessionFactory.openSession();
             Email email = session.get(Email.class, emailId);
-            byte[] bytes = email.getEmailAttachment().getBytes(1, (int) email.getEmailAttachment().length());
-            AttachedDTO attachedDTO = new AttachedDTO(bytes, email.getEmailAttachmentName());
+            AttachedDTO attachedDTO = null;
+            if (email.getEmailAttachment() != null) {
+                byte[] bytes = email.getEmailAttachment().getBytes(1, (int) email.getEmailAttachment().length());
+                attachedDTO = new AttachedDTO(bytes, email.getEmailAttachmentName());
+
+            }
             return attachedDTO;
         } finally {
             if (session != null) {
@@ -76,12 +79,19 @@ public class EmailDA {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery("select e from Email e join e.receiverPersons rp where rp.ID = :personID");
+            Query query = session.createSQLQuery("select e.* from t_email e INNER JOIN t_emailreceiverperson mp on e.id=mp.c_emailid where mp.c_personid= :personID")
+                    .addEntity(Email.class);
             query.setParameter("personID", personId);
             List<Email> emailList = query.list();
+
             for (Email email : emailList) {
                 Hibernate.initialize(email.getReceiverPersons());
                 Hibernate.initialize(email.getSenderPerson());
+                if (email.getEmailAttachment()==null){
+                    email.setEmailAttachmentName(null);
+                }else {
+                    email.setEmailAttachmentName("");
+                }
             }
             return emailList;
         } finally {
