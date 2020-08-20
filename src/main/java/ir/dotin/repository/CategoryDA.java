@@ -2,13 +2,11 @@ package ir.dotin.repository;
 
 import ir.dotin.entity.Category;
 import ir.dotin.entity.SubCategory;
-import ir.dotin.to.SubCategoryDTO;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -48,26 +46,19 @@ public class CategoryDA {
         }
     }
 
-    public List<SubCategoryDTO> findSubCategoriesByCategoryName(String categoryName) {
+    public List<SubCategory> findSubCategoriesByCategoryName(String categoryName) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from Category c where c.categoryName like :categoryName");
             query.setParameter("categoryName", categoryName);
             Category category = (Category) query.uniqueResult();
-            List<SubCategoryDTO> subCategoryDTOS = null;
+
             if (category != null) {
-                subCategoryDTOS = new ArrayList<>();
                 Hibernate.initialize(category.getSubCategories());
-                List<SubCategory> subCategories = category.getSubCategories();
-
-                for (SubCategory subCategory : subCategories) {
-                    SubCategoryDTO subCategoryDTO = new SubCategoryDTO(subCategory);
-                    subCategoryDTOS.add(subCategoryDTO);
-                }
+                return category.getSubCategories();
             }
-
-            return subCategoryDTOS;
+            return null;
         } finally {
             if (session != null) {
                 session.close();
@@ -75,16 +66,14 @@ public class CategoryDA {
         }
     }
 
-    public SubCategoryDTO findSubCategoryByName(String subCategoryName) {
+    public SubCategory findSubCategoryByName(String subCategoryName) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from SubCategory sc where sc.subCategoryName like :subCategoryName");
             query.setParameter("subCategoryName", subCategoryName);
             SubCategory subCategory = (SubCategory) query.uniqueResult();
-
-            SubCategoryDTO subCategoryDTO = new SubCategoryDTO(subCategory);
-            return subCategoryDTO;
+            return subCategory;
         } finally {
             if (session != null) {
                 session.close();

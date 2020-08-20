@@ -5,16 +5,22 @@ import ir.dotin.repository.EmailDA;
 import ir.dotin.to.AttachedDTO;
 import ir.dotin.to.EmailDTO;
 import ir.dotin.to.PersonDTO;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class EmailService {
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private EmailDA emailDA;
 
@@ -27,7 +33,11 @@ public class EmailService {
                 itr.remove();
             }
         }
-        Email email = new Email(emailDTO);
+        Email email = modelMapper.map(emailDTO, Email.class);
+        SerialBlob serialBlob = new SerialBlob(emailDTO.getMultipartFileEmailAttachFile().getBytes());
+        String originalFilename = emailDTO.getMultipartFileEmailAttachFile().getOriginalFilename();
+        email.setEmailAttachment(serialBlob);
+        email.setEmailAttachmentName(originalFilename);
         emailDA.addEmail(email);
     }
 
@@ -37,20 +47,26 @@ public class EmailService {
         return emailAttached;
     }
 
-    public List<Email> findAll() {
+    public List<EmailDTO> findAll() {
         List<Email> allEmails = emailDA.findAll();
-        return allEmails;
+        List<EmailDTO> emailDTOS = modelMapper.map(allEmails, new TypeToken<List<EmailDTO>>() {
+        }.getType());
+        return emailDTOS;
     }
 
     public List<EmailDTO> loadReceivedEmailsByPersonID(Long personId) {
-        List<EmailDTO> receivedEmailsByPersonId = emailDA.loadReceivedEmailsByPersonId(personId);
+        List<Email> emailList = emailDA.loadReceivedEmailsByPersonId(personId);
 
-        return receivedEmailsByPersonId;
+        List<EmailDTO> emailDTOS = modelMapper.map(emailList, new TypeToken<List<EmailDTO>>() {
+        }.getType());
+        return emailDTOS;
     }
 
     public List<EmailDTO> loadSentEmailsByPersonId(Long personId) {
-        List<EmailDTO> sentEmailsByPersonId = emailDA.loadSentEmailsByPersonId(personId);
-        return sentEmailsByPersonId;
+        List<Email> emailList = emailDA.loadSentEmailsByPersonId(personId);
+        List<EmailDTO> emailDTOS = modelMapper.map(emailList, new TypeToken<List<EmailDTO>>() {
+        }.getType());
+        return emailDTOS;
     }
 
 }

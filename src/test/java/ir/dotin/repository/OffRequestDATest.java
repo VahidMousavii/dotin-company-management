@@ -21,16 +21,16 @@ public class OffRequestDATest extends TestCase {
 
     @Test
     public void testFindOffRequestByPersonId() {
-        List<OffRequestDTO> offRequestByPersonId = offRequestDA.findOffRequestByPersonId(1L);
-        for (OffRequestDTO offRequest : offRequestByPersonId) {
+        List<OffRequest> offRequestByPersonId = offRequestDA.findOffRequestByPersonId(1L);
+        for (OffRequest offRequest : offRequestByPersonId) {
             System.out.println(offRequest.getOffDescription());
         }
     }
 
     @Test
     public void testFindPendingOffRequestsOfManager() {
-        List<OffRequestDTO> pendingOffRequestsOfManager = offRequestDA.findPendingOffRequestsOfManager(2L);
-        for (OffRequestDTO offRequest : pendingOffRequestsOfManager) {
+        List<OffRequest> pendingOffRequestsOfManager = offRequestDA.findPendingOffRequestsOfManager(2L);
+        for (OffRequest offRequest : pendingOffRequestsOfManager) {
             System.out.println(offRequest.getRequesterPerson().getPersonName());
             System.out.println(offRequest.getID());
             System.out.println(offRequest.getOffDescription());

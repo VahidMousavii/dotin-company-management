@@ -22,15 +22,5 @@ public class OffRequestDTO extends ParentEntityDTO implements Serializable {
     private SubCategoryDTO typeOfRequest;
     private SubCategoryDTO statusOfRequest;
 
-    public OffRequestDTO(OffRequest offRequest) {
-        super(offRequest);
-        this.offDescription = offRequest.getOffDescription();
-        this.offStartDate = offRequest.getOffStartDate();
-        this.offEndDate = offRequest.getOffEndDate();
-        this.requesterPerson = new PersonDTO(offRequest.getRequesterPerson());
-        this.typeOfRequest = new SubCategoryDTO(offRequest.getTypeOfRequest());
-        this.statusOfRequest = new SubCategoryDTO(offRequest.getStatusOfRequest());
-    }
-
 }
 

@@ -72,20 +72,18 @@ public class EmailDA {
         }
     }
 
-    public List<EmailDTO> loadReceivedEmailsByPersonId(Long personId) {
+    public List<Email> loadReceivedEmailsByPersonId(Long personId) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("select e from Email e join e.receiverPersons rp where rp.ID = :personID");
             query.setParameter("personID", personId);
             List<Email> emailList = query.list();
-            List<EmailDTO> emailDTOS = new ArrayList<>();
             for (Email email : emailList) {
-                EmailDTO emailDTO = new EmailDTO(email);
-                emailDTOS.add(emailDTO);
+                Hibernate.initialize(email.getReceiverPersons());
+                Hibernate.initialize(email.getSenderPerson());
             }
-
-            return emailDTOS;
+            return emailList;
         } finally {
             if (session != null) {
                 session.close();
@@ -93,7 +91,7 @@ public class EmailDA {
         }
     }
 
-    public List<EmailDTO> loadSentEmailsByPersonId(Long personId) {
+    public List<Email> loadSentEmailsByPersonId(Long personId) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
@@ -102,13 +100,9 @@ public class EmailDA {
             List<Email> emails = query.list();
             for (Email email : emails) {
                 Hibernate.initialize(email.getReceiverPersons());
+                Hibernate.initialize(email.getSenderPerson());
             }
-            List<EmailDTO> emailDTOS = new ArrayList<>();
-            for (Email email : emails) {
-                EmailDTO emailDTO = new EmailDTO(email);
-                emailDTOS.add(emailDTO);
-            }
-            return emailDTOS;
+            return emails;
         } finally {
             if (session != null) {
                 session.close();

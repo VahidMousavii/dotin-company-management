@@ -41,20 +41,4 @@ public class Email extends ParentEntity {
     @Column(name = "c_emailsubject")
     private String emailSubject;
 
-    public Email(EmailDTO emailDTO) throws IOException, SQLException {
-        super(emailDTO);
-
-        this.senderPerson = new Person(emailDTO.getSenderPerson());
-        if (emailDTO.getReceiverPersons() != null && emailDTO.getReceiverPersons().size() != 0) {
-            this.receiverPersons = new ArrayList<>();
-            for (PersonDTO receiverPersonDTO : emailDTO.getReceiverPersons()) {
-                receiverPersons.add(new Person(receiverPersonDTO));
-            }
-        }
-        this.emailAttachment = new SerialBlob(emailDTO.getEmailAttachment().getBytes());
-        this.emailAttachmentName = emailDTO.getEmailAttachment().getOriginalFilename();
-        this.emailContent = emailDTO.getEmailContent();
-        this.emailSubject = emailDTO.getEmailSubject();
-    }
-
 }

@@ -24,20 +24,4 @@ public class Category extends ParentEntity {
     @JoinColumn(name = "c_maincategoryid")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SubCategory> subCategories;
-
-    public Category(CategoryDTO categoryDTO) {
-        super(categoryDTO);
-        this.categoryName = categoryDTO.getCategoryName();
-        List<SubCategory> subCategories = new ArrayList<>();
-        if (categoryDTO.getSubCategories()!=null){
-            for (SubCategoryDTO subCategoryDTO : categoryDTO.getSubCategories()) {
-                SubCategory subCategory = new SubCategory(subCategoryDTO);
-                subCategories.add(subCategory);
-            }
-            this.subCategories = subCategories;
-        }
-
-    }
-
-
 }

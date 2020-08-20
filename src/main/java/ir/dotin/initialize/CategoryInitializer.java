@@ -1,9 +1,12 @@
 package ir.dotin.initialize;
 
 import ir.dotin.entity.Category;
+import ir.dotin.entity.Person;
 import ir.dotin.entity.SubCategory;
 import ir.dotin.repository.CategoryDA;
+import ir.dotin.to.PersonDTO;
 import ir.dotin.to.SubCategoryDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,8 +35,8 @@ public class CategoryInitializer implements InitializingBean {
 
     public void addPersonRoleCategory() {
 
-        List<SubCategoryDTO> roles = categoryDA.findSubCategoriesByCategoryName("role");
-        if (roles == null) {
+        List<SubCategory> subCategoryList = categoryDA.findSubCategoriesByCategoryName("role");
+        if (subCategoryList == null) {
             Category category = new Category();
             category.setCategoryName("role");
             category.setActive(true);
@@ -45,14 +48,12 @@ public class CategoryInitializer implements InitializingBean {
             subCategory1.setSubCategoryName("employee");
             subCategory1.setCreationDate(new Date().toString());
             subCategory1.setActive(true);
-            subCategory1.setMainCategory(category);
 
             SubCategory subCategory2 = new SubCategory();
             subCategory2.setSubCategoryFarsiName("مدیر");
             subCategory2.setSubCategoryName("manager");
             subCategory2.setCreationDate(new Date().toString());
             subCategory2.setActive(true);
-            subCategory2.setMainCategory(category);
 
             subCategories.addAll(Arrays.asList(subCategory1, subCategory2));
             category.setSubCategories(subCategories);
@@ -62,7 +63,7 @@ public class CategoryInitializer implements InitializingBean {
     }
 
     public void addTypeOfRequestCategory() {
-        List<SubCategoryDTO> typeOfRequest = categoryDA.findSubCategoriesByCategoryName("typeOfRequest");
+        List<SubCategory> typeOfRequest = categoryDA.findSubCategoriesByCategoryName("typeOfRequest");
         if (typeOfRequest == null) {
             Category category = new Category();
             category.setCategoryName("typeOfRequest");
@@ -74,14 +75,12 @@ public class CategoryInitializer implements InitializingBean {
             subCategory1.setSubCategoryName("daily");
             subCategory1.setCreationDate(new Date().toString());
             subCategory1.setActive(true);
-            subCategory1.setMainCategory(category);
 
             SubCategory subCategory2 = new SubCategory();
             subCategory2.setSubCategoryFarsiName("ساعتی");
             subCategory2.setSubCategoryName("hourly");
             subCategory2.setCreationDate(new Date().toString());
             subCategory2.setActive(true);
-            subCategory2.setMainCategory(category);
 
             List<SubCategory> subCategories = new ArrayList<>();
             subCategories.addAll(Arrays.asList(subCategory1, subCategory2));
@@ -91,7 +90,7 @@ public class CategoryInitializer implements InitializingBean {
     }
 
     public void addStatusOfRequest() {
-        List<SubCategoryDTO> statusOfRequest = categoryDA.findSubCategoriesByCategoryName("statusOfRequest");
+        List<SubCategory> statusOfRequest = categoryDA.findSubCategoriesByCategoryName("statusOfRequest");
         if (statusOfRequest == null) {
 
             Category category = new Category();
@@ -104,21 +103,18 @@ public class CategoryInitializer implements InitializingBean {
             subCategory1.setSubCategoryName("confirmed");
             subCategory1.setActive(true);
             subCategory1.setCreationDate(new Date().toString());
-            subCategory1.setMainCategory(category);
 
             SubCategory subCategory2 = new SubCategory();
             subCategory2.setSubCategoryFarsiName("در انتظار");
             subCategory2.setSubCategoryName("pending");
             subCategory2.setCreationDate(new Date().toString());
             subCategory2.setActive(true);
-            subCategory2.setMainCategory(category);
 
             SubCategory subCategory3 = new SubCategory();
             subCategory3.setSubCategoryFarsiName("رد شده");
             subCategory3.setSubCategoryName("rejected");
             subCategory3.setCreationDate(new Date().toString());
             subCategory3.setActive(true);
-            subCategory3.setMainCategory(category);
 
             List<SubCategory> subCategories = new ArrayList<>();
             subCategories.addAll(Arrays.asList(subCategory1, subCategory2, subCategory3));

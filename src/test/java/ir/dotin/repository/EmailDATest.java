@@ -19,8 +19,8 @@ public class EmailDATest extends TestCase {
 
     @Test
     public void testLoadReceivedEmailsByPersonId() {
-        List<EmailDTO> emailList = emailDA.loadReceivedEmailsByPersonId(2L);
-        for (EmailDTO email : emailList) {
+        List<Email> emailList = emailDA.loadReceivedEmailsByPersonId(2L);
+        for (Email email : emailList) {
             System.out.println(email.getEmailContent());
             System.out.println("============");
         }
@@ -28,8 +28,8 @@ public class EmailDATest extends TestCase {
     }
     @Test
     public void testLoadSentEmailsByPersonId() {
-        List<EmailDTO> sentEmail = emailDA.loadSentEmailsByPersonId(2L);
-        for (EmailDTO email : sentEmail) {
+        List<Email> sentEmail = emailDA.loadSentEmailsByPersonId(2L);
+        for (Email email : sentEmail) {
             System.out.println(email.getEmailContent());
         }
     }

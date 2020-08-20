@@ -24,11 +24,10 @@ public class OffRequestDA {
     @Autowired
     private CategoryService categoryService;
 
-    public void saveOffRequest(OffRequestDTO offRequestDTO) {
+    public void saveOffRequest(OffRequest offRequest) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            OffRequest offRequest = new OffRequest(offRequestDTO);
             Person person = session.load(Person.class, offRequest.getRequesterPerson().getID());
             offRequest.setRequesterPerson(person);
             SubCategory subCategory = session.load(SubCategory.class, offRequest.getTypeOfRequest().getID());
@@ -43,19 +42,13 @@ public class OffRequestDA {
         }
     }
 
-    public List<OffRequestDTO> findAll() {
+    public List<OffRequest> findAll() {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from OffRequest");
             List<OffRequest> list = query.list();
-            List<OffRequestDTO> offRequestDTOS = new ArrayList<>();
-            for (OffRequest offRequest : list) {
-                OffRequestDTO offRequestDTO = new OffRequestDTO(offRequest);
-                offRequestDTOS.add(offRequestDTO);
-            }
-
-            return offRequestDTOS;
+            return list;
         } finally {
             if (session != null) {
                 session.close();
@@ -63,21 +56,14 @@ public class OffRequestDA {
         }
     }
 
-    public List<OffRequestDTO> findOffRequestByPersonId(Long personId) {
+    public List<OffRequest> findOffRequestByPersonId(Long personId) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from OffRequest offR where offR.requesterPerson.ID= :personID");
             query.setParameter("personID", personId);
             List<OffRequest> list = query.list();
-
-            List<OffRequestDTO> offRequestDTOS = new ArrayList<>();
-            for (OffRequest offRequest : list) {
-                OffRequestDTO offRequestDTO = new OffRequestDTO(offRequest);
-                offRequestDTOS.add(offRequestDTO);
-            }
-
-            return offRequestDTOS;
+            return list;
         } finally {
             if (session != null) {
                 session.close();
@@ -85,20 +71,14 @@ public class OffRequestDA {
         }
     }
 
-    public List<OffRequestDTO> findPendingOffRequestsOfManager(Long managerPersonId) {
+    public List<OffRequest> findPendingOffRequestsOfManager(Long managerPersonId) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from OffRequest offR where offR.requesterPerson.directManager.ID= :managerPersonId and offR.statusOfRequest.subCategoryName like 'pending'");
             query.setParameter("managerPersonId", managerPersonId);
             List<OffRequest> list = query.list();
-
-            List<OffRequestDTO> offRequestDTOS = new ArrayList<>();
-            for (OffRequest offRequest : list) {
-                OffRequestDTO offRequestDTO = new OffRequestDTO(offRequest);
-                offRequestDTOS.add(offRequestDTO);
-            }
-            return offRequestDTOS;
+            return list;
         } finally {
             if (session != null) {
                 session.close();

@@ -22,31 +22,12 @@ public class EmailDTO extends ParentEntityDTO implements Serializable {
 
     private List<PersonDTO> receiverPersons;
 
-    private MultipartFile emailAttachment;
+    private MultipartFile multipartFileEmailAttachFile;
 
     private String emailAttachmentName;
-
-    private String emailAttachmentLink;
 
     private String emailContent;
 
     private String emailSubject;
-
-    public EmailDTO(Email email) {
-        super(email);
-        this.senderPerson = new PersonDTO(email.getSenderPerson());
-        if (email.getReceiverPersons() != null && email.getReceiverPersons().size() != 0) {
-            List<PersonDTO> receiverPersonDTOs = new ArrayList<>();
-            for (Person receiverPerson : email.getReceiverPersons()) {
-                PersonDTO personDTO = new PersonDTO(receiverPerson);
-                receiverPersonDTOs.add(personDTO);
-            }
-            this.receiverPersons = receiverPersonDTOs;
-        }
-        this.emailAttachmentLink = "someServlet.do" + email.getID();
-        this.emailAttachmentName = email.getEmailAttachmentName();
-        this.emailContent = email.getEmailContent();
-        this.emailSubject = email.getEmailSubject();
-    }
 
 }

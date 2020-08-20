@@ -32,37 +32,11 @@ public class Person extends ParentEntity {
     @JoinColumn(name = "c_persondirectmanagerid")
     private Person directManager;
     //Self-Join
-    @OneToMany(mappedBy = "directManager", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Person> employees;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "c_rolesubcategory")
     private SubCategory roleSubCategory;
-
-    public Person(PersonDTO personDTO) {
-        super(personDTO);
-        this.personFamily = personDTO.getPersonFamily();
-        this.personName = personDTO.getPersonName();
-        this.personPhone = personDTO.getPersonPhone();
-        this.nationalCode = personDTO.getNationalCode();
-        this.personnelCode = personDTO.getPersonnelCode();
-        this.roleSubCategory = new SubCategory(personDTO.getRoleSubCategory());
-        if (personDTO.getDirectManager() != null) {
-            this.directManager = new Person(personDTO.getDirectManager());
-        }
-        if (personDTO.getEmployees() != null && personDTO.getEmployees().size() != 0) {
-            List<Person> employeesPerson = new ArrayList<>();
-            for (PersonDTO employee : personDTO.getEmployees()) {
-                Person employeePerson = new Person(employee);
-                employeesPerson.add(employeePerson);
-            }
-            this.employees = employeesPerson;
-        }
-
-    }
-
 
     public Person(Long id) {
         super.setID(id);
     }
 }
-

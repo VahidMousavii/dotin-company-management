@@ -94,7 +94,7 @@
                 <label for="file">فایل</label>
             </td>
             <td>
-                <input id="file" type="file" name="emailAttachment"/>
+                <input id="file" type="file" name="multipartFileEmailAttachFile"/>
             </td>
         </tr>
         <tr>

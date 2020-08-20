@@ -3,15 +3,10 @@ package ir.dotin.repository;
 
 import ir.dotin.entity.Person;
 import ir.dotin.entity.SubCategory;
-import ir.dotin.to.PersonDTO;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -40,20 +35,14 @@ public class PersonDA {
         }
     }
 
-    public List<PersonDTO> findAll(PersonDTO personTO) {
+    public List<Person> findAll(Boolean isActive) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from Person tp where tp.active = :active");
-            query.setParameter("active", personTO.getActive());
+            query.setParameter("active", isActive);
             List<Person> list = query.list();
-
-            List<PersonDTO> personDTOS = new ArrayList<>();
-            for (Person person1 : list) {
-                PersonDTO personDTO = new PersonDTO(person1);
-                personDTOS.add(personDTO);
-            }
-            return personDTOS;
+            return list;
         } finally {
             if (session != null) {
                 session.close();
@@ -61,19 +50,14 @@ public class PersonDA {
         }
     }
 
-    public List<PersonDTO> findAllActiveManagers() {
+    public List<Person> findAllActiveManagers() {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from Person tp where tp.roleSubCategory.subCategoryName like :managerRole and tp.active = true");
             query.setParameter("managerRole", "manager");
             List<Person> list = query.list();
-
-            List<PersonDTO> personDTOS = new ArrayList<>();
-            for (Person person : list) {
-                personDTOS.add(new PersonDTO(person));
-            }
-            return personDTOS;
+            return list;
         } finally {
             if (session != null) {
                 session.close();
@@ -117,22 +101,21 @@ public class PersonDA {
         }
     }
 
-    public PersonDTO loadPerson(Long id) {
+    public Person loadPerson(Long id) {
         Session session = null;
         Person loadedPerson;
         try {
             session = sessionFactory.openSession();
             loadedPerson = session.get(Person.class, id);
-            return new PersonDTO(loadedPerson);
+            return loadedPerson;
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-
     }
 
-    public PersonDTO loadPersonWithSentEmails(Long id) {
+    public Person loadPersonWithSentEmails(Long id) {
         Session session = null;
         Person loadedPerson;
         try {
@@ -143,11 +126,11 @@ public class PersonDA {
                 session.close();
             }
         }
-        return new PersonDTO(loadedPerson);
+        return loadedPerson;
     }
 
 
-    public PersonDTO loadPerson(Person person) {
+    public Person loadPerson(Person person) {
         return this.loadPerson(person.getID());
     }
 
@@ -166,12 +149,12 @@ public class PersonDA {
         }
     }
 
-    public void active(PersonDTO personDTO) {
+    public void active(Long personId) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Person loadedPerson = (Person) session.get(Person.class, personDTO.getID());
+            Person loadedPerson = session.get(Person.class, personId);
             loadedPerson.setActive(true);
             session.saveOrUpdate(loadedPerson);
             tx.commit();
@@ -182,12 +165,12 @@ public class PersonDA {
         }
     }
 
-    public void deactivate(PersonDTO personDTO) {
+    public void deactivate(Long personId) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Transaction tx = session.beginTransaction();
-            Person loadedPerson = session.get(Person.class, personDTO.getID());
+            Person loadedPerson = session.get(Person.class, personId);
             loadedPerson.setActive(false);
             session.saveOrUpdate(loadedPerson);
             tx.commit();

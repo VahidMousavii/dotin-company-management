@@ -24,11 +24,4 @@ public class ParentEntityDTO implements Serializable {
 
     private Boolean enable;
 
-    public ParentEntityDTO(ParentEntity parentEntity) {
-        this.ID = parentEntity.getID();
-        this.version = parentEntity.getVersion();
-        this.creationDate = parentEntity.getCreationDate();
-        this.active = parentEntity.getActive();
-        this.enable = parentEntity.getEnable();
-    }
 }

@@ -19,13 +19,11 @@ public class CategoryTest {
         SubCategory subCategory = new SubCategory();
         subCategory.setSubCategoryName("Hourly");
         subCategory.setSubCategoryFarsiName("ساعتی");
-        subCategory.setMainCategory(category);
 
 
         SubCategory subCategory2 = new SubCategory();
         subCategory2.setSubCategoryName("Daily");
         subCategory2.setSubCategoryFarsiName("روزانه");
-        subCategory2.setMainCategory(category);
 
         if (category.getSubCategories() != null) {
             category.getSubCategories().addAll(Arrays.asList(subCategory, subCategory2));
@@ -49,9 +47,6 @@ public class CategoryTest {
         tester.setSubCategoryFarsiName("تستر");
 
         category.setSubCategories(Arrays.asList(developer, tester));
-
-        developer.setMainCategory(category);
-        tester.setMainCategory(category);
 
         CategoryDA categoryDA = new CategoryDA();
         categoryDA.addCategory(category);

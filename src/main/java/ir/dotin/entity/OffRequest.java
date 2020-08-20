@@ -36,15 +36,5 @@ public class OffRequest extends ParentEntity {
     @JoinColumn(name = "c_statusofrequest")
     private SubCategory statusOfRequest;
 
-    public OffRequest(OffRequestDTO offRequestDTO){
-        super(offRequestDTO);
-        this.offDescription=offRequestDTO.getOffDescription();
-        this.offStartDate=offRequestDTO.getOffStartDate();
-        this.offEndDate=offRequestDTO.getOffEndDate();
-        this.requesterPerson=new Person(offRequestDTO.getRequesterPerson());
-        this.typeOfRequest=new SubCategory(offRequestDTO.getTypeOfRequest());
-        this.statusOfRequest=new SubCategory(offRequestDTO.getStatusOfRequest());
-    }
-
 }
 
