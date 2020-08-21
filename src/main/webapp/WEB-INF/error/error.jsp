@@ -71,7 +71,7 @@
     <i class="far fa-question-circle fa-spin"></i>
     <div class="err2">4</div>
     <div class="msg">${message}
-        <p>Let's go <a href="/person/findAll.do?active=1">home</a> and try from there.</p></div>
+        <p> انتقال به<a href="/person/findAll.do?active=1"> صفحه اصلی</a> و تلاش مجدد</p></div>
 </div>
 </body>
 </html>

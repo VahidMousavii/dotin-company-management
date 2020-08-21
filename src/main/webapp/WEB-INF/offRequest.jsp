@@ -1,12 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>OFF REQUEST PAGE</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/calendar/persianDatepicker-default.css" />
+
+
+
+
 </head>
 <body>
 <div class="topnav">
@@ -19,7 +25,7 @@
     <a href="/email/showSentBox.do?ID=${person.ID}&active=true">صندوق ارسال</a>
 </div>
 <div class="box-table">
-    <form action="/offRequest/saveOffRequest.do" method="post">
+    <form action="/offRequest/saveOffRequest.do" method="post" autocomplete="off">
 
         <p>ایجاد درخواست مرخصی جدید</p>
 
@@ -29,10 +35,10 @@
         <input type="text" name="offDescription" id="offDescription"/>
         <br>
         <label for="offStartDate"> تاریخ آغاز مرخصی</label>
-        <input type="text" name="offStartDate" id="offStartDate"/>
+        <input type="text" class="usage" name="offStartDate" id="offStartDate"/>
         <br>
         <label for="offEndDate"> تاریخ پایان مرخصی</label>
-        <input type="text" name="offEndDate" id="offEndDate"/>
+        <input type="text" class="usage" name="offEndDate" id="offEndDate"/>
         <br>
         <select name="typeOfRequest.ID">
             <c:forEach items="${offRequestType}" var="offSub">
@@ -131,5 +137,20 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 </div>
+
+
+
+
+<script type="text/javascript" src="/assets/js/calendar/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/calendar/persianDatepicker.js"></script>
+
+<script>
+    $(function () {
+        //usage
+        $(".usage").persianDatepicker();
+
+    });
+</script>
+
 </body>
 </html>

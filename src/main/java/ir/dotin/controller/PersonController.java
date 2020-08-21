@@ -52,6 +52,10 @@ public class PersonController {
     public ModelAndView update(@ModelAttribute Person person) {
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/updatePerson.jsp");
         PersonDTO loadedPerson = personService.loadPerson(person.getID());
+        List<SubCategoryDTO> subCategories = categoryService.loadSubCategoriesByName("role");
+        List<PersonDTO> managers = personService.loadManagers();
+        modelAndView.addObject("managers", managers);
+        modelAndView.addObject("roles", subCategories);
         modelAndView.addObject("loadedPerson", loadedPerson);
         return modelAndView;
     }

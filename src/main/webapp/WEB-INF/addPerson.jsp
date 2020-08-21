@@ -12,8 +12,6 @@
     <title>ADD PERSON PAGE</title>
     <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
           rel="stylesheet">
-    <link href="css/custom.css"
-          rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
     <style>
         .center {
@@ -31,6 +29,7 @@
         }
     </style>
 </head>
+<body>
 <div class="topnav">
     <a  href="/person/findAll.do?active=1">صفحه اصلی</a>
     <a class="active" href="/person/savePage.do">ایجاد کاربر</a>
@@ -38,7 +37,7 @@
 <div class="center">
     <p class="pcenter">افزودن کاربر</p>
     <form action="/person/save.do" method="post">
-        <table class="box-table">
+        <table class="table-responsive">
             <tr>
                 <td class="tdlable">نام</td>
                 <td>
@@ -101,7 +100,6 @@
     </form>
     <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/custom.js"></script>
 </div>
 </body>
 </html>

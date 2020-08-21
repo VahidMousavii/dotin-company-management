@@ -3,7 +3,10 @@ package ir.dotin.repository;
 
 import ir.dotin.entity.Person;
 import ir.dotin.entity.SubCategory;
-import org.hibernate.*;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -73,10 +76,24 @@ public class PersonDA {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            Person loadedPerson = session.load(Person.class, person.getID());
+            Person loadedPerson = session.get(Person.class, person.getID());
             loadedPerson.setPersonName(person.getPersonName());
-            loadedPerson.setPersonPhone(person.getPersonPhone());
             loadedPerson.setPersonFamily(person.getPersonFamily());
+            loadedPerson.setPersonPhone(person.getPersonPhone());
+            loadedPerson.setNationalCode(person.getNationalCode());
+            loadedPerson.setPersonnelCode(person.getPersonnelCode());
+            if (person.getDirectManager() != null && person.getDirectManager().getID() != null) {
+                Person directManager = session.get(Person.class, person.getDirectManager().getID());
+                loadedPerson.setDirectManager(directManager);
+            } else {
+                loadedPerson.setDirectManager(null);
+            }
+            if (person.getRoleSubCategory() != null && person.getRoleSubCategory().getID() != null) {
+                SubCategory subCategoryRole = session.get(SubCategory.class, person.getRoleSubCategory().getID());
+                loadedPerson.setRoleSubCategory(subCategoryRole);
+            } else {
+                loadedPerson.setRoleSubCategory(null);
+            }
             loadedPerson.setActive(person.getActive());
             session.saveOrUpdate(loadedPerson);
             session.getTransaction().commit();

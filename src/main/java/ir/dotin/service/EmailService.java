@@ -6,6 +6,7 @@ import ir.dotin.repository.EmailDA;
 import ir.dotin.to.AttachedDTO;
 import ir.dotin.to.EmailDTO;
 import ir.dotin.to.PersonDTO;
+import ir.dotin.validate.EmailValidator;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,10 @@ public class EmailService {
     private ModelMapper modelMapper;
     @Autowired
     private EmailDA emailDA;
+    @Autowired
+    private EmailValidator emailValidator;
 
-    public void saveEmail(EmailDTO emailDTO) throws IOException, SQLException {
+    public void saveEmail(EmailDTO emailDTO) throws IOException, SQLException, DotinException {
         Iterator<PersonDTO> itr = emailDTO.getReceiverPersons().iterator(); // remove all even numbers while (itr.hasNext()) { Integer number = itr.next(); if (number % 2 == 0) { numbers.remove(number); } }
 
         while (itr.hasNext()) {
@@ -39,6 +42,7 @@ public class EmailService {
         String originalFilename = emailDTO.getMultipartFileEmailAttachFile().getOriginalFilename();
         email.setEmailAttachment(serialBlob);
         email.setEmailAttachmentName(originalFilename);
+        emailValidator.checkEmail(emailDTO);
         emailDA.addEmail(email);
     }
 

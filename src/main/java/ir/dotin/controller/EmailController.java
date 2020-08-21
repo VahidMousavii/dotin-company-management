@@ -43,7 +43,7 @@ public class EmailController {
     }
 
     @RequestMapping(value = "/saveEmail.do", method = RequestMethod.POST)
-    public ModelAndView saveEmail(@ModelAttribute EmailDTO emailDTO) throws IOException, SQLException {
+    public ModelAndView saveEmail(@ModelAttribute EmailDTO emailDTO) throws IOException, SQLException, DotinException {
         ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
         emailService.saveEmail(emailDTO);
         return modelAndView;

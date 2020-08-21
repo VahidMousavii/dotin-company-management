@@ -34,6 +34,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
+    <link rel="stylesheet" href="/assets/css/menu/kamadatepicker.scss">
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="/assets/js/calendar/calendar.js"></script>
+    <style>
+        .center {
+            margin: auto;
+            width: 50%;
+            border: 3px solid green;
+            padding: 10px;
+        }
+
+        .pcenter {
+            margin: auto;
+            width: 50%;
+        }
+
+        .tdlable {
+            text-align: right
+        }
+    </style>
 </head>
 <body>
 <div class="topnav">
@@ -45,8 +65,9 @@
     <a href="/email/showInbox.do?ID=${senderPerson.ID}&active=true">صندوق دریافت</a>
     <a href="/email/showSentBox.do?ID=${senderPerson.ID}&active=true">صندوق ارسال</a>
 </div>
+<div class="center">
 <form action="/email/saveEmail.do" method="post" enctype="multipart/form-data">
-    <table class="table table-striped">
+    <table class="table-responsive">
         <tr>
             <td>
                 <label for="subject">عنوان</label>
@@ -62,9 +83,7 @@
             <td>
                 <label for="emailContent"></label>
 
-                <textarea id="emailContent" name="emailContent" rows="5" cols="50">
-
-                </textarea>
+                <textarea id="emailContent" name="emailContent" rows="5" cols="50"></textarea>
             </td>
 
         </tr>
@@ -77,8 +96,13 @@
         <tr>
             <td>
                 <p>گیرنده</p>
-                <input type="button" onclick="addReceiverPerson()" value="add receiver"/>
-                <br/>
+            </td>
+            <td>
+                <input type="button" onclick="addReceiverPerson()" value="افزودن گیرنده"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="200px">
                 <select name="receiverPersons[0].ID">
                     <c:forEach items="${receiverPersons}" var="receiverPerson">
                         <option value="${receiverPerson.ID}">${receiverPerson.personName}</option>
@@ -119,6 +143,6 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 </form>
-
+</div>
 </body>
 </html>

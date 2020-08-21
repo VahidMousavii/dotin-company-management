@@ -17,7 +17,7 @@ public class ExceptionAdvice {
         System.out.print(random);
         e.printStackTrace();
         ModelAndView modelAndView = new ModelAndView("/WEB-INF/error/error.jsp");
-        String message = "خطا رخ داده لظفا با پشتیبانی تماس یگیرید شماره پیگیری " + random;
+        String message = "خطا رخ داده لطفا با پشتیبانی تماس یگیرید شماره پیگیری " + random;
         modelAndView.addObject("message", message);
         return modelAndView;
     }

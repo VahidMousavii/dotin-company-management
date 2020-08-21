@@ -1,6 +1,7 @@
 package ir.dotin.controller;
 
 import ir.dotin.entity.SubCategory;
+import ir.dotin.exception.DotinException;
 import ir.dotin.repository.OffRequestDA;
 import ir.dotin.entity.Category;
 import ir.dotin.entity.OffRequest;
@@ -50,7 +51,7 @@ public class OffRequestController {
     }
 
     @RequestMapping(value = "/saveOffRequest.do", method = RequestMethod.POST)
-    public ModelAndView saveOffRequest(@ModelAttribute OffRequestDTO offRequestDTO) {
+    public ModelAndView saveOffRequest(@ModelAttribute OffRequestDTO offRequestDTO) throws DotinException {
         ModelAndView modelAndView = new ModelAndView("/offRequest/offRequest.do?ID=" + offRequestDTO.getRequesterPerson().getID());
         offRequestService.saveOffRequest(offRequestDTO);
         return modelAndView;
