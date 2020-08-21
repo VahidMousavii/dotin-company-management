@@ -37,6 +37,7 @@
 <div class="center">
     <p class="pcenter">افزودن کاربر</p>
     <form action="/person/save.do" method="post">
+        <input type="hidden" name="enable" value="1"/>
         <table class="table-responsive">
             <tr>
                 <td class="tdlable">نام</td>

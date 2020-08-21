@@ -198,4 +198,36 @@ public class PersonDA {
         }
     }
 
+    public void enable(Long personId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();
+            Person loadedPerson = session.get(Person.class, personId);
+            loadedPerson.setEnable(true);
+            session.saveOrUpdate(loadedPerson);
+            tx.commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public void disable(Long personId) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();
+            Person loadedPerson = session.get(Person.class, personId);
+            loadedPerson.setEnable(false);
+            session.saveOrUpdate(loadedPerson);
+            tx.commit();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
 }

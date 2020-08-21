@@ -13,7 +13,6 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,6 +52,14 @@ public class PersonService {
 
     public void deactivate(PersonDTO personDTO) {
         personDA.deactivate(personDTO.getID());
+    }
+
+    public void enable(PersonDTO personDTO) {
+        personDA.enable(personDTO.getID());
+    }
+
+    public void disable(PersonDTO personDTO) {
+        personDA.disable(personDTO.getID());
     }
 
     public void active(PersonDTO personDTO) {

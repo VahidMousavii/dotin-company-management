@@ -44,7 +44,8 @@
             <td>شماره تماس</td>
             <td>مدیر مستقیم</td>
             <td>بروزرسانی</td>
-            <td>تغییر وضعیت</td>
+            <td>حذف/بازیابی</td>
+            <td>فعال/غیرفعال</td>
             <td>مرخصی</td>
             <td>ایمیل</td>
         </tr>
@@ -58,13 +59,25 @@
                 <td>${person.personPhone}</td>
                 <td>${person.directManager.personName}</td>
                 <td><a href="/person/update.do?ID=${person.ID}">بروزرسانی</a></td>
-                <c:if test="${person.active != true}">
-                    <td><a href="/person/active.do?ID=${person.ID}&active=false">فعال کردن</a></td>
+                <td>
+                    <c:if test="${person.active != true}">
+                        <a href="/person/active.do?ID=${person.ID}&active=0">بازیابی</a>
 
-                </c:if>
-                <c:if test="${person.active == true}">
-                    <td><a href="/person/deactivate.do?ID=${person.ID}&active=true">غیر فعال کردن</a></td>
-                </c:if>
+                    </c:if>
+                    <c:if test="${person.active == true}">
+                        <a href="/person/deactivate.do?ID=${person.ID}&active=1">حذف</a>
+                    </c:if>
+                </td>
+                <td>
+                    <c:if test="${person.enable != true}">
+                        <a href="/person/enable.do?ID=${person.ID}&active=true">فعال</a>
+
+                    </c:if>
+                    <c:if test="${person.enable == true}">
+                        <a href="/person/disable.do?ID=${person.ID}&active=true">غیر فعال</a>
+                    </c:if>
+                </td>
+
                 <td>
                     <a href="/offRequest/offRequest.do?ID=${person.ID}">مرخصی</a>
                 </td>

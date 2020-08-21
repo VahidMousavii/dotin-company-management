@@ -1,9 +1,8 @@
 package ir.dotin.controller;
 
-import ir.dotin.entity.SubCategory;
+import ir.dotin.entity.Person;
 import ir.dotin.exception.DotinException;
 import ir.dotin.repository.PersonDA;
-import ir.dotin.entity.Person;
 import ir.dotin.service.CategoryService;
 import ir.dotin.service.PersonService;
 import ir.dotin.to.PersonDTO;
@@ -70,15 +69,29 @@ public class PersonController {
 
     @RequestMapping("/active.do")
     public ModelAndView active(PersonDTO personDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=" + personDTO.getActive());
         personService.active(personDTO);
         return modelAndView;
     }
 
     @RequestMapping("/deactivate.do")
     public ModelAndView deactivate(@ModelAttribute PersonDTO personDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=" + personDTO.getActive());
         personService.deactivate(personDTO);
+        return modelAndView;
+    }
+
+    @RequestMapping("/enable.do")
+    public ModelAndView enable(@ModelAttribute PersonDTO personDTO) {
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        personService.enable(personDTO);
+        return modelAndView;
+    }
+
+    @RequestMapping("/disable.do")
+    public ModelAndView disable(@ModelAttribute PersonDTO personDTO) {
+        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        personService.disable(personDTO);
         return modelAndView;
     }
 
