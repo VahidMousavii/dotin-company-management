@@ -3,32 +3,46 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>FIND ALL PAGE</title>
+    <title>صفحه اصلی</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
+    <style>
+        .center {
+            margin: auto;
+            width: 50%;
+            border: 3px solid green;
+            padding: 10px;
+        }
+        .pcenter {
+            margin: auto;
+            width: 50%;
+        }
+        .tdlable {
+            text-align: right
+        }
+    </style>
 </head>
 
 
 <body>
 <div class="topnav">
-    <a class="active" href="/person/findAll.do?active=1">صفحه اصلی</a>
-    <a href="/person/savePage.do">ایجاد کاربر</a>
+    <a class="active" href="/person/findAll.do?active=1"><img src="/assets/image/home.png" width="32" height="32">صفحه اصلی</a>
+    <a href="/person/savePage.do"><img src="/assets/image/profile.jpg" width="32" height="32">ایجاد کاربر</a>
 </div>
 <div>
 
     <form action="/person/findAll.do">
-        <br>
-        <table class="box-table">
+    <table class="center" >
             <tr>
-                <td>نمایش کاربرهای فعال</td>
-                <td><input type="checkbox" name="active" checked/></td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="نمایش"/>
+                <td class="center"><p class="pcenter">نمایش کاربرهای فعال
+                <input type="checkbox" name="active" checked/>
+
+                    <input type="submit" class="center" value="نمایش"/>
                 </td>
             </tr>
+
+
         </table>
 
     </form>
@@ -45,7 +59,7 @@
             <td>مدیر مستقیم</td>
             <td>بروزرسانی</td>
             <td>حذف/بازیابی</td>
-            <td>فعال/غیرفعال</td>
+            <td>فعال/غیرفعال کردن کاربر</td>
             <td>مرخصی</td>
             <td>ایمیل</td>
         </tr>
@@ -70,19 +84,19 @@
                 </td>
                 <td>
                     <c:if test="${person.enable != true}">
-                        <a href="/person/enable.do?ID=${person.ID}&active=true">فعال</a>
+                        <a href="/person/enable.do?ID=${person.ID}&active=true">فعال کردن</a>
 
                     </c:if>
                     <c:if test="${person.enable == true}">
-                        <a href="/person/disable.do?ID=${person.ID}&active=true">غیر فعال</a>
+                        <a href="/person/disable.do?ID=${person.ID}&active=true">غیرفعال کردن</a>
                     </c:if>
                 </td>
 
                 <td>
-                    <a href="/offRequest/offRequest.do?ID=${person.ID}">مرخصی</a>
+                    <a href="/offRequest/offRequest.do?ID=${person.ID}">مشاهده و درخواست مرخصی</a>
                 </td>
                 <td>
-                    <a href="/email/email.do?ID=${person.ID}&active=1">ایمیل</a>
+                    <a href="/email/email.do?ID=${person.ID}&active=1">مشاهده و ارسال ایمیل</a>
                 </td>
             </tr>
         </c:forEach>

@@ -4,10 +4,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>UPDATE PERSON PAGE</title>
+    <title>بروزرسانی</title>
     <title>ADD PERSON PAGE</title>
     <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
           rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
     <style>
         .center {
@@ -29,13 +31,13 @@
 </head>
 <body>
 <div class="topnav">
-    <a href="/person/findAll.do?active=1">صفحه اصلی</a>
-    <a href="/person/savePage.do">ایجاد کاربر</a>
-    <a href="/offRequest/offRequest.do?ID=${loadedPerson.ID}">مرخصی</a>
-    <a href="#" class="active">بروز رسانی</a>
-    <a href="/email/email.do?ID=${person.ID}">ارسال ایمیل</a>
-    <a href="/email/showInbox.do?ID=${loadedPerson.ID}&active=true">صندوق دریافت</a>
-    <a href="/email/showSentBox.do?ID=${loadedPerson.ID}&active=true">صندوق ارسال</a>
+    <a href="/person/findAll.do?active=1" > <img src="/assets/image/home.png" width="32" height="32">صفحه اصلی </a>
+    <a href="/person/savePage.do"><img src="/assets/image/profile.jpg" width="32" height="32">ایجاد کاربر</a>
+    <a href="/offRequest/offRequest.do?ID=${loadedPerson.ID}"><img src="/assets/image/offRequest.jpg" width="32" height="32">مرخصی</a>
+    <a href="#" class="active"><img src="/assets/image/updatePerson.png" width="32" height="32">بروز رسانی</a>
+    <a href="/email/email.do?ID=${person.ID}">ارسال ایمیل<img src="/assets/image/email/email.png " width="32" height="32"></a>
+    <a href="/email/showInbox.do?ID=${loadedPerson.ID}&active=true"> <img src="/assets/image/inbox.png"width="32" height="32"> صندوق دریافت</a>
+    <a href="/email/showSentBox.do?ID=${loadedPerson.ID}&active=true">صندوق ارسال <img src="/assets/image/outbox.png" width="32" height="32"></a>
 </div>
 <div class="center">
     <p class="pcenter">بروزرسانی کاربر</p>

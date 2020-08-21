@@ -13,5 +13,11 @@ public class PersonValidator {
         if (personDTO.getPersonName() == null || "".equals(personDTO.getPersonName())) {
             throw new DotinException("مقدار نام نمیتواند خالی باشد.");
         }
+        if(personDTO.getPersonFamily() == null || "".equals(personDTO.getPersonFamily())){
+            throw new DotinException(("مقدار نام خانوادگی نمیتواند خالی باشد"));
+        }
+        if(personDTO.getNationalCode() == null || "".equals(personDTO.getNationalCode())){
+            throw new DotinException("کد ملی نمیتواند خالی باشد");
+        }
     }
 }

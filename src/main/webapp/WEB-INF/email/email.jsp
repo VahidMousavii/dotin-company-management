@@ -30,11 +30,10 @@
 </script>
 <html>
 <head>
-    <title>SEND EMAIL PAGE</title>
+    <title>ایمیل</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
-    <link rel="stylesheet" href="/assets/css/menu/kamadatepicker.scss">
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="/assets/js/calendar/calendar.js"></script>
     <style>
@@ -57,13 +56,13 @@
 </head>
 <body>
 <div class="topnav">
-    <a href="/person/findAll.do?active=1">صفحه اصلی</a>
-    <a href="/person/savePage.do">ایجاد کاربر</a>
-    <a href="/offRequest/offRequest.do?ID=${senderPerson.ID}">مرخصی</a>
-    <a href="/person/update.do?ID=${senderPerson.ID}">بروز رسانی</a>
-    <a href="#" class="active">ایمیل</a>
-    <a href="/email/showInbox.do?ID=${senderPerson.ID}&active=true">صندوق دریافت</a>
-    <a href="/email/showSentBox.do?ID=${senderPerson.ID}&active=true">صندوق ارسال</a>
+    <a href="/person/findAll.do?active=1" > <img src="/assets/image/home.png" width="32" height="32">صفحه اصلی </a>
+    <a href="/person/savePage.do"><img src="/assets/image/profile.jpg" width="32" height="32"> ایجاد کاربر</a>
+    <a href="/offRequest/offRequest.do?ID=${senderPerson.ID}"><img src="/assets/image/offRequest.jpg" width="32" height="32">مرخصی</a>
+    <a href="/person/update.do?ID=${senderPerson.ID}"><img src="/assets/image/updatePerson.png" width="32" height="32">بروز رسانی</a>
+    <a href="#" class="active"> <img src="/assets/image/email/email.png" width="32" height="32">ارسال ایمیل</a>
+    <a href="/email/showInbox.do?ID=${senderPerson.ID}&active=true"> <img src="/assets/image/inbox.png" width="32" height="32">صندوق دریافت</a>
+    <a href="/email/showSentBox.do?ID=${senderPerson.ID}&active=true"><img src="/assets/image/outbox.png" width="32" height="32"> صندوق ارسال</a>
 </div>
 <div class="center">
 <form action="/email/saveEmail.do" method="post" enctype="multipart/form-data">
