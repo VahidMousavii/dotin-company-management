@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -28,6 +29,7 @@ public class PersonDA {
             }
             SubCategory loadSubCat = session.load(SubCategory.class, person.getRoleSubCategory().getID());
             person.setRoleSubCategory(loadSubCat);
+            person.setCreationDate(new Date().toString());
             session.save(person);
             tx.commit();
 

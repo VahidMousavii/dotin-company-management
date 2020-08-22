@@ -33,7 +33,7 @@
 <div>
 
     <form action="/person/findAll.do">
-    <table class="center" >
+    <table class="center">
             <tr>
                 <td class="center"><p class="pcenter">نمایش کاربرهای فعال
                 <input type="checkbox" name="active" checked/>
@@ -47,7 +47,8 @@
 
     </form>
 
-    <table class="table table-striped table-dark" style="width: 95%; margin-left: auto;
+    <table class="table table-striped table-dark" style="
+    width: 98%; margin-left: auto;
   margin-right: auto">
 
         <tr>
@@ -59,7 +60,7 @@
             <td>مدیر مستقیم</td>
             <td>بروزرسانی</td>
             <td>حذف/بازیابی</td>
-            <td>فعال/غیرفعال کردن کاربر</td>
+            <td>فعال/غیرفعال</td>
             <td>مرخصی</td>
             <td>ایمیل</td>
         </tr>

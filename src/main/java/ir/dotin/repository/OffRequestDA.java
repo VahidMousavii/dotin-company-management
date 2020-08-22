@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -33,6 +34,7 @@ public class OffRequestDA {
             SubCategory subCategory = session.load(SubCategory.class, offRequest.getTypeOfRequest().getID());
             offRequest.setTypeOfRequest(subCategory);
             Transaction tx = session.beginTransaction();
+            offRequest.setCreationDate(new Date().toString());
             session.save(offRequest);
             tx.commit();
         } finally {

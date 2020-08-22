@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -31,6 +32,7 @@ public class EmailDA {
             email.setReceiverPersons(receiverPersonList);
             Person lodedSenderPerson = session.get(Person.class, email.getSenderPerson().getID());
             email.setSenderPerson(lodedSenderPerson);
+            email.setCreationDate(new Date().toString());
             session.save(email);
             tx.commit();
         } finally {
