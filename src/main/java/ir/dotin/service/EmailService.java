@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,14 +41,14 @@ public class EmailService {
         String originalFilename = emailDTO.getMultipartFileEmailAttachFile().getOriginalFilename();
         email.setEmailAttachment(serialBlob);
         email.setEmailAttachmentName(originalFilename);
-//        emailValidator.checkEmail(emailDTO);
+        emailValidator.checkEmail(emailDTO);
         emailDA.addEmail(email);
     }
 
     public AttachedDTO getEmailAttached(EmailDTO emailDTO) throws SQLException, DotinException {
 
         AttachedDTO emailAttached = emailDA.getEmailAttached(emailDTO.getID());
-        if (emailAttached==null){
+        if (emailAttached == null) {
             throw new DotinException("فایل پیوست وجود ندارد");
         }
         return emailAttached;

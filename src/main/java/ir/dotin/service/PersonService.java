@@ -67,7 +67,7 @@ public class PersonService {
     }
 
     public void save(PersonDTO personDTO) throws DotinException {
-//        personValidator.checkPerson(personDTO);
+        personValidator.checkPerson(personDTO);
         Person person = modelMapper.map(personDTO, Person.class);
         personDA.save(person);
     }
