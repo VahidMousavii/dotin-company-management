@@ -42,7 +42,7 @@ public class EmailService {
         String originalFilename = emailDTO.getMultipartFileEmailAttachFile().getOriginalFilename();
         email.setEmailAttachment(serialBlob);
         email.setEmailAttachmentName(originalFilename);
-        emailValidator.checkEmail(emailDTO);
+//        emailValidator.checkEmail(emailDTO);
         emailDA.addEmail(email);
     }
 

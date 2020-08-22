@@ -39,7 +39,7 @@ public class OffRequestService {
         SubCategoryDTO subCategoryDTO = categoryService.loadSubCategoryBySubCategoryName("pending");
         offRequestDTO.setStatusOfRequest(subCategoryDTO);
         OffRequest offRequest = modelMapper.map(offRequestDTO, OffRequest.class);
-        offRequestValidator.checkOffRequest(offRequestDTO);
+//        offRequestValidator.checkOffRequest(offRequestDTO);
         offRequestDA.saveOffRequest(offRequest);
     }
 

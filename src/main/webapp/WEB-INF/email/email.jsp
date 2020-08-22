@@ -27,6 +27,20 @@
         document.getElementById("persons" + receiverPersonId).remove();
         i--;
     }
+
+    function check() {
+        var subject = document.getElementById("subject").value;
+        if (subject == '') {
+            alert('فیلد عنوان نمیتواند خالی باشد');
+            return false;
+        }
+        var emailContent = document.getElementById("emailContent").value;
+        if (emailContent == '') {
+            alert('متن ایمیل نمیتواند خالی باشد')
+            return false;
+        }
+
+    }
 </script>
 <html>
 <head>
@@ -65,7 +79,7 @@
     <a href="/email/showSentBox.do?ID=${senderPerson.ID}&active=true"><img src="/assets/image/outbox.png" width="32" height="32"> صندوق ارسال</a>
 </div>
 <div class="center">
-<form action="/email/saveEmail.do" method="post" enctype="multipart/form-data">
+<form action="/email/saveEmail.do" method="post" enctype="multipart/form-data" onsubmit="return check();">
     <table class="table-responsive">
         <tr>
             <td>

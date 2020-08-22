@@ -22,48 +22,80 @@
             border: 3px solid green;
             padding: 10px;
         }
+
         .pcenter {
             margin: auto;
             width: 50%;
         }
+
         .tdlable {
             text-align: right
         }
     </style>
+    <script type="text/javascript">
+        function check() {
+            var personName = document.getElementById("personName").value;
+            if (personName == '') {
+                alert('فیلد نام نمیتواند خالی باشد');
+                return false;
+            }
+            var personFamily = document.getElementById("personFamily").value;
+            if (personFamily == '') {
+                alert('فیلد نام خانوادگی نمیتواند خالی باشد')
+                return false;
+            }
+
+            var personPhone = document.getElementById("personPhone").value;
+            if (personPhone == '') {
+                alert('فیلد شماره تماس نمیتواند خالی باشد');
+                return false;
+            }
+            var personnelCode = document.getElementById("personnelCode").value;
+            if (personnelCode == '') {
+                alert('فیلد کد پرسنلی نمیتواند خالی باشد');
+                return false;
+            }
+            var nationalCode = document.getElementById("nationalCode").value;
+            if (nationalCode == '') {
+                alert('فیلد کد ملی نمیتواند خالی باشد');
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="topnav">
-    <a  href="/person/findAll.do?active=1"><img src="/assets/image/home.png" width="32" height="32">صفحه اصلی</a>
+    <a href="/person/findAll.do?active=1"><img src="/assets/image/home.png" width="32" height="32">صفحه اصلی</a>
     <a class="active" href="/person/savePage.do"><img src="/assets/image/profile.jpg" width="32" height="32">ایجاد کاربر</a>
 </div>
 <div class="center">
     <p class="pcenter">افزودن کاربر</p>
-    <form action="/person/save.do" method="post">
+    <form action='/person/save.do' method='post' onsubmit="return check();">
         <input type="hidden" name="enable" value="1"/>
         <table class="table-responsive">
             <tr>
                 <td class="tdlable">نام</td>
                 <td>
-                    <input type="text" name="personName"/>
+                    <input type="text" id="personName" name="personName" autofocus/>
                 </td>
             </tr>
             <tr>
                 <td class="tdlable">نام خانوادگی</td>
                 <td>
-                    <input type="text" name="personFamily"/>
+                    <input type="text" id="personFamily" name="personFamily"/>
                 </td>
             </tr>
             <tr>
                 <td class="tdlable">شماره تماس</td>
-                <td><input type="text" name="personPhone"/></td>
+                <td><input type="text" id="personPhone" name="personPhone"/></td>
             </tr>
             <tr>
                 <td class="tdlable">کد پرسنلی</td>
-                <td><input type="text" name="personnelCode"/></td>
+                <td><input type="text" id="personnelCode" name="personnelCode"/></td>
             </tr>
             <tr>
                 <td class="tdlable">کد ملی</td>
-                <td><input type="text" name="nationalCode"/></td>
+                <td><input type="text" id="nationalCode" name="nationalCode"/></td>
             </tr>
             <tr>
                 <td class="tdlable">
@@ -96,7 +128,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input type="submit" value="ثبت کاربر جدید"/>
+                    <input type="submit" name="submit" id="submit" value="ثبت کاربر جدید"/>
                 </td>
             </tr>
         </table>

@@ -26,6 +26,26 @@
             text-align: right
         }
     </style>
+    <script type="text/javascript">
+        function check() {
+            var offDescription = document.getElementById("offDescription").value;
+            if (offDescription == '') {
+                alert('فیلد توضیحات نمیتواند خالی باشد');
+                return false;
+            }
+            var offStartDate = document.getElementById("offStartDate").value;
+            if (offStartDate == '') {
+                alert('تاریخ شروع نمیتواند خالی باشد')
+                return false;
+            }
+
+            var offEndDate = document.getElementById("offEndDate").value;
+            if (offEndDate == '') {
+                alert('تاریخ پایان نمیتواند خالی باشد');
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="topnav">
@@ -39,7 +59,7 @@
 </div>
 <div class="center">
     <table>
-    <form action="/offRequest/saveOffRequest.do" method="post" autocomplete="off">
+    <form action="/offRequest/saveOffRequest.do" method="post" autocomplete="off" onsubmit="return check()">
         <p class="center"><b>ایجاد درخواست مرخصی جدید</b></p>
             <input type="hidden" name="requesterPerson.ID" value="${person.ID}"/>
             <tr>

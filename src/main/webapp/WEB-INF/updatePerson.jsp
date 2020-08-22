@@ -28,21 +28,54 @@
             text-align: right
         }
     </style>
+    <script type="text/javascript">
+        function check() {
+            var personName = document.getElementById("personName").value;
+            if (personName == '') {
+                alert('فیلد نام نمیتواند خالی باشد');
+                return false;
+            }
+            var personFamily = document.getElementById("personFamily").value;
+            if (personFamily == '') {
+                alert('فیلد نام خانوادگی نمیتواند خالی باشد')
+                return false;
+            }
+            var personPhone = document.getElementById("personPhone").value;
+            if (personPhone == '') {
+                alert('فیلد شماره تماس نمیتواند خالی باشد');
+                return false;
+            }
+            var personnelCode = document.getElementById("personnelCode").value;
+            if (personnelCode == '') {
+                alert('فیلد کد پرسنلی نمیتواند خالی باشد');
+                return false;
+            }
+            var nationalCode = document.getElementById("nationalCode").value;
+            if (nationalCode == '') {
+                alert('فیلد کد ملی نمیتواند خالی باشد');
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="topnav">
-    <a href="/person/findAll.do?active=1" > <img src="/assets/image/home.png" width="32" height="32">صفحه اصلی </a>
+    <a href="/person/findAll.do?active=1"> <img src="/assets/image/home.png" width="32" height="32">صفحه اصلی </a>
     <a href="/person/savePage.do"><img src="/assets/image/profile.jpg" width="32" height="32">ایجاد کاربر</a>
-    <a href="/offRequest/offRequest.do?ID=${loadedPerson.ID}"><img src="/assets/image/offRequest.jpg" width="32" height="32">مرخصی</a>
+    <a href="/offRequest/offRequest.do?ID=${loadedPerson.ID}"><img src="/assets/image/offRequest.jpg" width="32"
+                                                                   height="32">مرخصی</a>
     <a href="#" class="active"><img src="/assets/image/updatePerson.png" width="32" height="32">بروز رسانی</a>
-    <a href="/email/email.do?ID=${person.ID}">ارسال ایمیل<img src="/assets/image/email/email.png " width="32" height="32"></a>
-    <a href="/email/showInbox.do?ID=${loadedPerson.ID}&active=true"> <img src="/assets/image/inbox.png"width="32" height="32"> صندوق دریافت</a>
-    <a href="/email/showSentBox.do?ID=${loadedPerson.ID}&active=true">صندوق ارسال <img src="/assets/image/outbox.png" width="32" height="32"></a>
+    <a href="/email/email.do?ID=${person.ID}">ارسال ایمیل<img src="/assets/image/email/email.png " width="32"
+                                                              height="32"></a>
+    <a href="/email/showInbox.do?ID=${loadedPerson.ID}&active=true"> <img src="/assets/image/inbox.png" width="32"
+                                                                          height="32"> صندوق دریافت</a>
+    <a href="/email/showSentBox.do?ID=${loadedPerson.ID}&active=true">صندوق ارسال <img src="/assets/image/outbox.png"
+                                                                                       width="32" height="32"></a>
 </div>
 <div class="center">
     <p class="pcenter">بروزرسانی کاربر</p>
 
-    <form action="/person/saveUpdate.do">
+    <form action="/person/saveUpdate.do" method="post" onsubmit="return check()">
         <table class="table-responsive">
             <tr>
                 <td class="tdlable">
@@ -52,25 +85,25 @@
             <tr>
                 <td class="tdlable">نام</td>
                 <td>
-                    <input type="text" name="personName" value="${loadedPerson.personName}"/>
+                    <input type="text" id="personName" name="personName" value="${loadedPerson.personName}"/>
                 </td>
             </tr>
             <tr>
                 <td class="tdlable">نام خانوادگی</td>
                 <td>
-                    <input type="text" name="personFamily" value="${loadedPerson.personFamily}"/>
+                    <input type="text" id="personFamily" name="personFamily" value="${loadedPerson.personFamily}"/>
                 </td>
             </tr>
             <tr>
                 <td class="tdlable">کد پرسنلی</td>
                 <td>
-                    <input type="text" name="personnelCode" value="${loadedPerson.personnelCode}"/>
+                    <input type="text" id="personnelCode" name="personnelCode" value="${loadedPerson.personnelCode}"/>
                 </td>
             </tr>
             <tr>
                 <td class="tdlable">کد ملی</td>
                 <td>
-                    <input type="text" name="nationalCode" value="${loadedPerson.nationalCode}"/>
+                    <input type="text" id="nationalCode" name="nationalCode" value="${loadedPerson.nationalCode}"/>
                 </td>
             </tr>
             <tr>
