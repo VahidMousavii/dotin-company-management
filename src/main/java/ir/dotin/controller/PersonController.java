@@ -42,8 +42,10 @@ public class PersonController {
     @RequestMapping(value = "/save.do", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute PersonDTO personDTO) throws DotinException {
         ModelAndView modelAndView = new ModelAndView();
+        String message = "ثبت کاربر جدید";
+        modelAndView.addObject("message", message);
         personService.save(personDTO);
-        modelAndView.setViewName("/person/findAll.do?active=1");
+        modelAndView.setViewName("/WEB-INF/successful.jsp");
         return modelAndView;
     }
 
@@ -61,7 +63,9 @@ public class PersonController {
 
     @RequestMapping("/saveUpdate.do")
     public ModelAndView saveUpdate(@ModelAttribute PersonDTO personDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "بروزرسانی کاربر";
+        modelAndView.addObject("message", message);
         personService.update(personDTO);
         modelAndView.addObject(personDTO);
         return modelAndView;
@@ -69,28 +73,36 @@ public class PersonController {
 
     @RequestMapping("/active.do")
     public ModelAndView active(PersonDTO personDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=" + personDTO.getActive());
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "بازیابی کاربر";
+        modelAndView.addObject("message", message);
         personService.active(personDTO);
         return modelAndView;
     }
 
     @RequestMapping("/deactivate.do")
     public ModelAndView deactivate(@ModelAttribute PersonDTO personDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=" + personDTO.getActive());
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "حذف کاربر";
+        modelAndView.addObject("message", message);
         personService.deactivate(personDTO);
         return modelAndView;
     }
 
     @RequestMapping("/enable.do")
     public ModelAndView enable(@ModelAttribute PersonDTO personDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "فعال سازی کاربر";
+        modelAndView.addObject("message", message);
         personService.enable(personDTO);
         return modelAndView;
     }
 
     @RequestMapping("/disable.do")
     public ModelAndView disable(@ModelAttribute PersonDTO personDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "غیر فعال سازی کاربر";
+        modelAndView.addObject("message", message);
         personService.disable(personDTO);
         return modelAndView;
     }

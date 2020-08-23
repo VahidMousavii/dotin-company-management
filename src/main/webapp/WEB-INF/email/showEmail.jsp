@@ -15,7 +15,7 @@
 
         .pcenter {
             margin: auto;
-            width: 50%;
+            width: 20%;
         }
 
         .tdlable {
@@ -48,10 +48,10 @@
     <table class=center>
 
         <c:if test="${receivedEmails.size()==0}">
-            <p>ایمیلی برای نمایش وجود ندارد</p>
+            <p class="pcenter">ایمیلی برای نمایش وجود ندارد</p>
         </c:if>
         <c:if test="${receivedEmails.size()==null}">
-            <p>ایمیلی برای نمایش وجود ندارد</p>
+            <p class="pcenter">ایمیلی برای نمایش وجود ندارد</p>
         </c:if>
         <c:forEach items="${receivedEmails}" var="recEmail">
             <tr>
@@ -81,10 +81,10 @@
 <c:if test="${isSent==true}">
     <table class="center">
         <c:if test="${sentEmails.size()==0}">
-            <p>ایمیلی برای نمایش وجود ندارد</p>
+            <p class="pcenter">ایمیلی برای نمایش وجود ندارد</p>
         </c:if>
         <c:if test="${sentEmails.size()==null}">
-            <p>ایمیلی برای نمایش وجود ندارد</p>
+            <p class="pcenter">ایمیلی برای نمایش وجود ندارد</p>
         </c:if>
         <c:forEach items="${sentEmails}" var="sentEmail">
             <tr>

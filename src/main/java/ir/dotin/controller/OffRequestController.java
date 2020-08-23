@@ -52,20 +52,26 @@ public class OffRequestController {
 
     @RequestMapping(value = "/saveOffRequest.do", method = RequestMethod.POST)
     public ModelAndView saveOffRequest(@ModelAttribute OffRequestDTO offRequestDTO) throws DotinException {
-        ModelAndView modelAndView = new ModelAndView("/offRequest/offRequest.do?ID=" + offRequestDTO.getRequesterPerson().getID());
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "ثبت مرخصی";
+        modelAndView.addObject("message",message);
         offRequestService.saveOffRequest(offRequestDTO);
         return modelAndView;
     }
 
     @RequestMapping(value = "/confirmOffRequest.do", method = RequestMethod.GET)
     public ModelAndView confirmOffRequest(@ModelAttribute OffRequestDTO offRequestDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "تایید مرخصی";
+        modelAndView.addObject("confirmMessage",message);
         offRequestService.confirmStatus(offRequestDTO);
         return modelAndView;
     }
     @RequestMapping(value = "/rejectOffRequest.do", method = RequestMethod.GET)
     public ModelAndView rejectOffRequest(@ModelAttribute OffRequestDTO offRequestDTO) {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "رد مرخصی";
+        modelAndView.addObject("rejectMessage",message);
         offRequestService.rejectStatus(offRequestDTO);
         return modelAndView;
     }

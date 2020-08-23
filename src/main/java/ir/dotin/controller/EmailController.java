@@ -44,7 +44,9 @@ public class EmailController {
 
     @RequestMapping(value = "/saveEmail.do", method = RequestMethod.POST)
     public ModelAndView saveEmail(@ModelAttribute EmailDTO emailDTO) throws IOException, SQLException, DotinException {
-        ModelAndView modelAndView = new ModelAndView("/person/findAll.do?active=1");
+        ModelAndView modelAndView = new ModelAndView("/WEB-INF/successful.jsp");
+        String message = "ارسال ایمیل";
+        modelAndView.addObject("message",message);
         emailService.saveEmail(emailDTO);
         return modelAndView;
     }

@@ -19,7 +19,7 @@
 
         .pcenter {
             margin: auto;
-            width: 50%;
+            width: 20%;
         }
 
         .tdlable {
@@ -60,7 +60,7 @@
 <div class="center">
     <table>
     <form action="/offRequest/saveOffRequest.do" method="post" autocomplete="off" onsubmit="return check()">
-        <p class="center"><b>ایجاد درخواست مرخصی جدید</b></p>
+        <p class="pcenter"><b>ایجاد درخواست </b></p><br>
             <input type="hidden" name="requesterPerson.ID" value="${person.ID}"/>
             <tr>
                 <td class="tdlable">
