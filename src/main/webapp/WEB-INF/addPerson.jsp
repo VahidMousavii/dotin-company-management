@@ -61,24 +61,6 @@
                 return false;
             }
         }
-        $(function() {
-            $(document).on('submit', "#saveForm", function(e) {
-                e.preventDefault();
-
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: "post",
-                    data: $(this).serialize(),
-                    error:function(){
-                        alert("ERROR : CANNOT CONNECT TO SERVER");
-                    },
-                    success: function(data) {
-                        alert(data);
-                    }
-                });
-                return false;
-            });
-        });
     </script>
 </head>
 <body>
