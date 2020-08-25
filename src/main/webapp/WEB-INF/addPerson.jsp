@@ -16,6 +16,10 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
     <style>
+        body {
+            text-align: center;
+            background: #EBF0F5;
+        }
         .center {
             margin: auto;
             width: 50%;
@@ -34,11 +38,11 @@
     </style>
     <script type="text/javascript">
         function check() {
-            var personName = document.getElementById("personName").value;
-            if (personName == '') {
-                alert('فیلد نام نمیتواند خالی باشد');
-                return false;
-            }
+            // var personName = document.getElementById("personName").value;
+            // if (personName == '') {
+            //     alert('فیلد نام نمیتواند خالی باشد');
+            //     return false;
+            // }
             var personFamily = document.getElementById("personFamily").value;
             if (personFamily == '') {
                 alert('فیلد نام خانوادگی نمیتواند خالی باشد')

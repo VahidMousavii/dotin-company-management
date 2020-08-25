@@ -10,6 +10,10 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/menu/menu.css">
     <link type="text/css" rel="stylesheet" href="/assets/css/calendar/persianDatepicker-default.css"/>
     <style>
+        body {
+            text-align: center;
+            background: #EBF0F5;
+        }
         .center {
             margin: auto;
             width: 50%;

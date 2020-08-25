@@ -11,7 +11,6 @@
     <style>
         body {
             text-align: center;
-            padding: 40px 0;
             background: #EBF0F5;
         }
         h1 {

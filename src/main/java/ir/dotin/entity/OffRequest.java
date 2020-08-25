@@ -24,7 +24,7 @@ public class OffRequest extends ParentEntity {
     @Column(name = "c_offenddate")
     private String offEndDate;
 
-    @JoinColumn(name = "c_requestpersonid")
+    @JoinColumn(name = "c_requesterpersonid")
     @ManyToOne(cascade = CascadeType.ALL)
     private Person requesterPerson;
 

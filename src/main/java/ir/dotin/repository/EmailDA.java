@@ -30,8 +30,8 @@ public class EmailDA {
                 receiverPersonList.add(loadedReceiverPerson);
             }
             email.setReceiverPersons(receiverPersonList);
-            Person lodedSenderPerson = session.get(Person.class, email.getSenderPerson().getID());
-            email.setSenderPerson(lodedSenderPerson);
+            Person loadedSenderPerson = session.get(Person.class, email.getSenderPerson().getID());
+            email.setSenderPerson(loadedSenderPerson);
             email.setCreationDate(new Date().toString());
             session.save(email);
             tx.commit();
@@ -85,13 +85,12 @@ public class EmailDA {
                     .addEntity(Email.class);
             query.setParameter("personID", personId);
             List<Email> emailList = query.list();
-
             for (Email email : emailList) {
                 Hibernate.initialize(email.getReceiverPersons());
                 Hibernate.initialize(email.getSenderPerson());
-                if (email.getEmailAttachment()==null){
+                if (email.getEmailAttachment() == null) {
                     email.setEmailAttachmentName(null);
-                }else {
+                } else {
                     email.setEmailAttachmentName("");
                 }
             }

@@ -51,6 +51,10 @@
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="/assets/js/calendar/calendar.js"></script>
     <style>
+        body {
+            text-align: center;
+            background: #EBF0F5;
+        }
         .center {
             margin: auto;
             width: 50%;
